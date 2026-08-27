@@ -1,0 +1,12 @@
+{
+  "sample": true,
+  "updated": "[DATE]",
+  "note": "Robustness = score in the shaped condition relative to clean, per system, across domains. Replace these rows with the first evaluation run and set sample to false; design/build_site.py renders them.",
+  "rows": [
+    {"system": "Model A", "robustness": 81.4, "clean": 92.0, "shaped": 78.6, "domains": 6},
+    {"system": "Model B", "robustness": 76.9, "clean": 90.1, "shaped": 70.2, "domains": 6},
+    {"system": "Model C", "robustness": 71.2, "clean": 88.7, "shaped": 63.9, "domains": 6},
+    {"system": "Model D", "robustness": 64.5, "clean": 87.3, "shaped": 55.1, "domains": 5},
+    {"system": "Model E", "robustness": 58.0, "clean": 85.9, "shaped": 47.4, "domains": 6}
+  ]
+}
