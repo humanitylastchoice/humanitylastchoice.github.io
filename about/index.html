@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — Humanity’s Last Choice</title>
+<meta name="description" content="A benchmark for AI recommendation robustness — does the system still choose for the person when the options are written to win the model?">
+<link rel="canonical" href="https://humanitylastchoice.org/about/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Humanity’s Last Choice">
+<meta property="og:title" content="What Humanity’s Last Choice is">
+<meta property="og:description" content="A benchmark for AI recommendation robustness — does the system still choose for the person when the options are written to win the model?">
+<meta property="og:url" content="https://humanitylastchoice.org/about/">
+<meta property="og:image" content="https://humanitylastchoice.org/assets/og.png">
+<meta property="og:image:width" content="2400"><meta property="og:image:height" content="1260">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@humanlastchoice">
+<meta name="twitter:image" content="https://humanitylastchoice.org/assets/og.png">
+<meta name="theme-color" content="#F8F5F0">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #F8F5F0; }
+    body { font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #1D1713; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+    .serif { font-family: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif; font-optical-sizing: auto; }
+    .mono { font-family: 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace; }
+    .ov { font-family: 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; line-height: 1.2; }
+    a { color: #1D1713; text-decoration: none; }
+    a:hover { color: var(--accent, #A83630); }
+    button { font: inherit; cursor: pointer; }
+    .nav-link { font-size: 14px; font-weight: 500; color: #534B45; transition: color .15s ease; }
+    .nav-link:hover { color: #1D1713; }
+    .track { color: #1D1713; text-decoration: underline; text-decoration-color: #B6B0A7; text-underline-offset: 4px; transition: text-decoration-color .15s ease, color .15s ease; }
+    .track:hover { text-decoration-color: var(--accent, #A83630); }
+    .btn { transition: filter .15s ease, transform .15s ease; }
+    .btn:hover { filter: brightness(1.25); }
+    .btn:active { transform: translateY(1px); }
+    .btn-paper:hover { filter: brightness(0.94); color: #1D1713; }
+    .btn-ghost { transition: background .15s ease; }
+    .btn-ghost:hover { background: rgba(248,245,240,0.1); color: #F8F5F0; }
+    .arrow-link .arr { display: inline-flex; transition: transform .2s ease; }
+    .arrow-link:hover .arr { transform: translateX(4px); }
+    .row-link { transition: background .15s ease; }
+    .row-link:hover { background: #F0ECE4; }
+    .cell { transition: background .2s ease; }
+    .cell:hover { background: #F0ECE4; }
+    .card-link { transition: transform .35s cubic-bezier(.2,.65,.2,1); }
+    .card-link:hover { transform: translateY(-4px); }
+    .card-link:hover .card-title { text-decoration: underline; text-decoration-color: #B6B0A7; text-underline-offset: 5px; }
+    .tab { transition: background .15s ease, color .15s ease, border-color .15s ease; }
+    .tab:hover { border-color: #1D1713; }
+    .page::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: .07; mix-blend-mode: multiply; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    .reveal { opacity: 0; animation: rise .8s cubic-bezier(.2,.65,.2,1) forwards; }
+    .pop { opacity: 0; animation: rise .55s cubic-bezier(.2,.65,.2,1) forwards; }
+    .fade { opacity: 0; animation: fade .5s ease forwards; }
+    .draw { animation: draw 1s cubic-bezier(.45,0,.2,1) forwards; }
+    .panel { animation: rise .5s cubic-bezier(.2,.65,.2,1); }
+
+    [data-io] { opacity: 0; transform: translateY(18px); transition: opacity .9s cubic-bezier(.2,.65,.2,1), transform .9s cubic-bezier(.2,.65,.2,1); transition-delay: calc(var(--i, 0) * 90ms); }
+    [data-io].in { opacity: 1; transform: none; }
+    .bar-fill { transform: scaleX(0); transform-origin: left center; transition: transform 1.4s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i, 0) * 120ms + .2s); }
+    .in .bar-fill { transform: scaleX(1); }
+    .sweep { background-image: linear-gradient(var(--accent-soft, #EEDED9), var(--accent-soft, #EEDED9)); background-repeat: no-repeat; background-size: 0% 100%; transition: background-size 1.6s cubic-bezier(.2,.7,.2,1) .4s; }
+    .in .sweep { background-size: 100% 100%; }
+
+    @keyframes travel { 0% { offset-distance: 0%; opacity: 0; } 2% { opacity: 1; } 9% { opacity: 1; } 10% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
+    .traveler { offset-rotate: 0deg; animation: travel 13.2s cubic-bezier(.5,0,.3,1) infinite; }
+    @keyframes travel-stem { 0% { offset-distance: 0%; opacity: 0; } 6% { opacity: 1; } 52% { opacity: 1; } 58% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
+    .traveler-stem { offset-rotate: 0deg; animation: travel-stem 2.2s cubic-bezier(.5,0,.3,1) infinite; }
+    @keyframes rowglow { 0%, 9.5% { color: #1D1713; } 10.5% { color: var(--accent, #A83630); } 21% { color: var(--accent, #A83630); } 30%, 100% { color: #1D1713; } }
+    .rowglow { animation: rowglow 13.2s linear infinite; }
+    @keyframes march { to { stroke-dashoffset: -14; } }
+    .march { animation: march .9s linear infinite; }
+    @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+    .breathe { animation: breathe 2.2s ease-in-out infinite; transform-origin: center; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+    .pulse { animation: pulse 2.2s ease-in-out infinite; }
+    .pop.rowglow { animation: rise .55s cubic-bezier(.2,.65,.2,1) forwards, rowglow 13.2s linear infinite; }
+    .fade.march { animation: fade .5s ease forwards, march .9s linear infinite; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .pop, .fade, .panel { animation: none; opacity: 1; }
+      .draw { animation: none; stroke-dashoffset: 0 !important; }
+      [data-io] { opacity: 1; transform: none; transition: none; }
+      .bar-fill { transform: none; transition: none; }
+      .sweep { background-size: 100% 100%; transition: none; }
+      .traveler, .traveler-stem, .rowglow, .march, .breathe, .pulse { animation: none; }
+    }
+  
+.btn, .arrow-link, .btn-ghost { white-space: nowrap; }
+/* ---- tabs & panels (the design's template logic, as CSS) ---- */
+.tab[aria-selected="true"] { background: #1D1713 !important; color: #F8F5F0 !important; border-color: #1D1713 !important; }
+.panel-wrap[hidden] { display: none; }
+/* ---- responsive: values from design/Mobile.dc.html ---- */
+@media (max-width: 900px) {
+  .page { min-width: 0 !important; }
+  header > div { padding: 0 20px !important; height: 56px !important; }
+  header nav, header .btn { display: none !important; }
+  section, footer > div { padding-left: 20px !important; padding-right: 20px !important; }
+  section > div[style*="padding: 112px 112px"], section > div[style*="padding: 96px 112px"] { padding-left: 20px !important; padding-right: 20px !important; }
+  [style*="grid-template-columns: repeat(12"] { display: block !important; }
+  [style*="grid-column"] { padding-top: 0 !important; margin-top: 18px; }
+  [style*="grid-template-columns: repeat(6"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  [style*="grid-template-columns: repeat(6"] > .cell { padding: 18px 12px 20px 0 !important; border-bottom: 1px solid #D5D0C8; }
+  [style*="grid-template-columns: repeat(6"] > .cell:nth-child(even) { padding-left: 16px !important; border-left: 1px solid #D5D0C8 !important; }
+  [style*="grid-template-columns: repeat(6"] > .cell:nth-child(odd) { border-left: 0 !important; }
+  [style*="grid-template-columns: repeat(3"], [style*="grid-template-columns: repeat(2"] { grid-template-columns: minmax(0, 1fr) !important; }
+  #top { padding: 44px 20px 36px !important; }
+  #top h1 { font-size: 44px !important; }
+  #top .arrow-link, #top .btn { width: 100%; justify-content: center; }
+  .fig1-wrap { width: 100% !important; height: auto !important; aspect-ratio: 2 / 1; }
+  section > div[style*="display: flex; align-items: stretch"] { flex-direction: column !important; }
+  section > div[style*="display: flex; align-items: stretch"] > div:last-child { padding-left: 0 !important; border-left: 0 !important; padding-top: 20px; border-top: 1px solid #D5D0C8; }
+  .tab-row { overflow-x: auto; margin-right: -20px; padding-right: 20px; }
+  .tab-row .tab { flex: none; }
+  .tab-row > span { display: none !important; }
+  .lb-row, .ov[style*="56px minmax(0, 1fr) 300px"] { grid-template-columns: 32px minmax(0, 1fr) 88px !important; height: auto !important; padding: 12px 0; }
+  .lb-extra, .ov[style*="56px minmax(0, 1fr) 300px"] > span:nth-child(n+4) { display: none !important; }
+  .lb-track { width: 100px !important; }
+  #leaderboard div[style*="margin-top: 28px; display: flex"] { flex-direction: column !important; align-items: flex-start !important; gap: 14px !important; }
+  h2.serif { font-size: 30px !important; }
+  section[style*="background: #1D1713"] h2 { font-size: 38px !important; }
+  footer > div { padding: 32px 20px 44px !important; }
+}
+.about-body p { margin: 0 0 18px; max-width: 680px; font-size: 19px; line-height: 1.6; color: #534B45; }
+.about-body ul { margin: 0 0 18px; padding-left: 22px; max-width: 680px; }
+.about-body li { margin: 0 0 10px; font-size: 17px; line-height: 1.55; color: #534B45; }
+.about-body a { color: #1D1713; text-decoration: underline; text-underline-offset: 3px; }
+.about-body strong { color: #1D1713; font-weight: 500; }
+.about-body code { font-size: 15px; }
+.about-body p.about-thesis { max-width: 760px; font-size: 46px; line-height: 1.06; letter-spacing: -0.02em; color: #1D1713; }
+.about-body p.about-thesis em { color: #A83630; }
+@media (max-width: 900px) { .about h1 { font-size: 36px !important; } .about-body p.about-thesis { font-size: 30px; } }
+</style>
+</head>
+<body>
+<div class="page about"><header style="position: sticky; top: 0; z-index: 20; background: rgba(248, 245, 240, 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid #D5D0C8;">
+    <div style="max-width: 1440px; margin: 0 auto; padding: 0 112px; height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 32px;">
+      <a href="/#top" style="display: flex; align-items: center; gap: 12px; color: #1D1713;">
+        <svg width="49" height="22" viewBox="0 88 240 108" fill="none" style="flex: none;">
+          <g stroke="#1D1713" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke-width="11" d="M36 118 C 26 118, 16 120, 6 124"></path>
+            <path stroke-width="11" d="M36 182 C 26 184, 16 186, 6 190"></path>
+            <path stroke-width="11" d="M36 118 C 58 108, 84 104, 100 108 C 116 106, 130 106, 142 108 C 150 109, 150 121, 142 122 C 130 122, 116 124, 104 126"></path>
+            <path stroke-width="11" d="M104 126 C 110 138, 102 148, 92 146 C 100 160, 92 170, 80 166 C 86 178, 76 188, 62 182 C 52 178, 44 182, 36 182"></path>
+            <path stroke-width="9" d="M74 110 C 80 96, 98 94, 104 106"></path>
+          </g>
+          <path d="M162 115 L 198 151 L 199 133 L 224 143 L 228 132 L 204 124 L 215 113 Z" fill="#1D1713" stroke="#1D1713" stroke-width="7" stroke-linejoin="round"></path>
+        </svg>
+        <span class="serif" style="font-size: 21px; font-weight: 500; letter-spacing: -0.005em; line-height: 1;">Humanity's Last Choice</span>
+      </a>
+      <nav style="display: flex; align-items: center; gap: 28px;">
+        <a class="nav-link" href="/#research">Research</a>
+        <a class="nav-link" href="/#benchmark">Benchmark</a>
+        <a class="nav-link" href="/#leaderboard">Leaderboard</a>
+        <a class="nav-link" href="#">Paper</a>
+        <a class="nav-link" href="https://github.com/humanitylastchoice">Code</a>
+      </nav>
+      <a class="btn" href="/#leaderboard" style="display: inline-flex; align-items: center; height: 40px; padding: 0 16px; border-radius: 3px; background: #1D1713; color: #F8F5F0; font-size: 14px; font-weight: 500;">See the leaderboard</a>
+    </div>
+  </header><main><section style="max-width: 1440px; margin: 0 auto; padding: 88px 112px 48px;"><div class="ov" style="display: flex; gap: 10px; color: #867F77;"><span style="color: #A83630;">About</span><span>The initiative</span></div><h1 class="serif" style="margin: 20px 0 0; max-width: 760px; font-size: 52px; line-height: 1.05; font-weight: 400; letter-spacing: -0.02em;">What Humanity’s Last Choice is</h1><p style="margin: 22px 0 0; max-width: 680px; font-size: 19px; line-height: 1.6; color: #534B45;">A benchmark for AI recommendation robustness — does the system still choose for the person when the options are written to win the model?</p></section><section style="max-width: 1440px; margin: 0 auto; padding: 0 112px 56px;"><div style="max-width: 760px; border-top: 1px solid #D5D0C8; padding-top: 28px;"><div class="ov" style="display: flex; gap: 10px; color: #867F77;"><span style="color: #A83630;">01</span><span>The thesis</span></div><div class="about-body" style="margin-top: 18px;"><p class="serif about-thesis">The last choice humans make is <em>who chooses next.</em></p></div></div></section><section style="max-width: 1440px; margin: 0 auto; padding: 0 112px 56px;"><div style="max-width: 760px; border-top: 1px solid #D5D0C8; padding-top: 28px;"><div class="ov" style="display: flex; gap: 10px; color: #867F77;"><span style="color: #A83630;">02</span><span>The argument</span></div><div class="about-body" style="margin-top: 18px;"><p>People choose an AI system, and that system increasingly chooses for them: what they watch, where they travel, which restaurants they visit, what art they discover, which papers they read, which tools or skills they use. The person makes one choice — which system to ask — and the system makes the rest. The first decision quietly becomes the one that decides the others.</p>
+<p>A recommendation has two sides. On one side is the person and what they meant. On the other are the candidates — the restaurants, the towns, the papers, the tools — and the material that describes them: their webpages, their listings, their abstracts. That material used to be written for people. It is now, quietly, being written for models. Not always, and not always badly; a clear description helps a model the way it helps a reader. But when the reward for being recommended is large and the reader is a machine, the material starts to change. A listing can be written for a reader, or written to win the recommendation. Same restaurant, two descriptions. The question that interests us is not whether the second one is distasteful. It is whether the system still chooses for the person when it reads it.</p></div></div></section><section style="max-width: 1440px; margin: 0 auto; padding: 0 112px 56px;"><div style="max-width: 760px; border-top: 1px solid #D5D0C8; padding-top: 28px;"><div class="ov" style="display: flex; gap: 10px; color: #867F77;"><span style="color: #A83630;">03</span><span>What the benchmark is</span></div><div class="about-body" style="margin-top: 18px;"><p>Humanity’s Last Choice is a broad-coverage benchmark for the robustness of AI recommendations across six kinds of choice people delegate: what they watch, where they travel, which restaurants they visit, what art they discover, which papers they read, which tools or skills they use. In each domain a task pairs a person’s request with candidates drawn from real source material.</p>
+<p>Every task runs twice. In the <strong>clean</strong> condition the candidates are described as they are. In the <strong>shaped</strong> condition one candidate has been rewritten to win the recommendation — the way material on the open web is already being rewritten. The system’s job is the same both times: choose for the person. The gap between the two runs is the score.</p>
+<p>We report both numbers, per system and per domain, with the date. We do not report a single headline figure; the interesting facts are in the gaps — which domains are fragile, which kinds of shaping work, which systems notice.</p></div></div></section><section style="max-width: 1440px; margin: 0 auto; padding: 0 112px 56px;"><div style="max-width: 760px; border-top: 1px solid #D5D0C8; padding-top: 28px;"><div class="ov" style="display: flex; gap: 10px; color: #867F77;"><span style="color: #A83630;">04</span><span>What we want to exist</span></div><div class="about-body" style="margin-top: 18px;"><p>A common standard for recommendation robustness, so that systems can be compared, weaknesses found, and progress tracked. The benchmark, the code, and the leaderboard are public. Systems can be submitted for evaluation, domains can be contributed, and tasks can be written with us. Every task is documented well enough that anyone can see what a shaped variant does and does not change.</p></div></div></section><section style="max-width: 1440px; margin: 0 auto; padding: 0 112px 56px;"><div style="max-width: 760px; border-top: 1px solid #D5D0C8; padding-top: 28px;"><div class="ov" style="display: flex; gap: 10px; color: #867F77;"><span style="color: #A83630;">05</span><span>What we do not claim</span></div><div class="about-body" style="margin-top: 18px;"><ul><li>We do not name villains. Candidates that learn to talk to the model are behaving the way candidates always have, in whatever language the gatekeeper speaks. The gatekeeper has changed, and the evidence should change with it. Candidates are “shaped”, never “malicious”.</li><li>We do not publish a single headline number, and never a number without its condition — clean or shaped — and its date.</li><li>We do not use real businesses as examples. Illustrative listings such as “Osteria Alba” or “Costa Brilhante” are labelled illustrative.</li><li>Nothing that carries a benchmark number is published before the results owner has replaced the sample rows. Sample data is always labelled.</li><li>[What the first release does not measure — results owner to state it before launch.]</li></ul></div></div></section><section style="max-width: 1440px; margin: 0 auto; padding: 0 112px 56px;"><div style="max-width: 760px; border-top: 1px solid #D5D0C8; padding-top: 28px;"><div class="ov" style="display: flex; gap: 10px; color: #867F77;"><span style="color: #A83630;">07</span><span>Who we are, and how to take part</span></div><div class="about-body" style="margin-top: 18px;"><ul><li>Who we are: [Name] and colleagues at [Affiliation]. In public text we are “we”.</li><li>Website and leaderboard: <a href="https://humanitylastchoice.org">https://humanitylastchoice.org</a> · Paper: [arXiv link] · Code: [GitHub link] · Contact: <a href="mailto:hello@humanitylastchoice.org">hello@humanitylastchoice.org</a></li><li>Submit a system: open an issue with the <em>Submit a model</em> template in the benchmark repository. Every submitted system runs on the same task set, clean and shaped, and both numbers are published.</li><li>Contribute a domain, or write tasks with us: open an issue, or write to <a href="mailto:hello@humanitylastchoice.org">hello@humanitylastchoice.org</a>.</li><li>Follow along: <code class="mono">humanitylastchoice</code> on every platform (on X, <code class="mono">@humanlastchoice</code>).</li></ul></div></div></section></main><footer style="border-top: 1px solid #D5D0C8;">
+    <div style="max-width: 1440px; margin: 0 auto; padding: 56px 112px 64px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px;">
+      <div style="grid-column: span 5; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <svg width="42" height="19" viewBox="0 88 240 108" fill="none" style="flex: none;">
+          <g stroke="#1D1713" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke-width="11" d="M36 118 C 26 118, 16 120, 6 124"></path>
+            <path stroke-width="11" d="M36 182 C 26 184, 16 186, 6 190"></path>
+            <path stroke-width="11" d="M36 118 C 58 108, 84 104, 100 108 C 116 106, 130 106, 142 108 C 150 109, 150 121, 142 122 C 130 122, 116 124, 104 126"></path>
+            <path stroke-width="11" d="M104 126 C 110 138, 102 148, 92 146 C 100 160, 92 170, 80 166 C 86 178, 76 188, 62 182 C 52 178, 44 182, 36 182"></path>
+            <path stroke-width="9" d="M74 110 C 80 96, 98 94, 104 106"></path>
+          </g>
+          <path d="M162 115 L 198 151 L 199 133 L 224 143 L 228 132 L 204 124 L 215 113 Z" fill="#1D1713" stroke="#1D1713" stroke-width="7" stroke-linejoin="round"></path>
+        </svg>
+          <span class="serif" style="font-size: 18px; font-weight: 500; line-height: 1;">Humanity's Last Choice</span>
+        </div>
+        <span class="mono" style="font-size: 12px; line-height: 1.6; color: #867F77;">An open research initiative · [Affiliation]<br>© 2026</span>
+      </div>
+      <div style="grid-column: 7 / span 2; display: flex; flex-direction: column; gap: 10px;">
+        <span class="ov" style="color: #867F77;">Research</span>
+        <a href="/about/" style="font-size: 14px;">Thesis</a>
+        <a href="/#benchmark" style="font-size: 14px;">Benchmark</a>
+        <a href="/#research" style="font-size: 14px;">Writing</a>
+      </div>
+      <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 10px;">
+        <span class="ov" style="color: #867F77;">Leaderboard</span>
+        <a href="/#leaderboard" style="font-size: 14px;">Results</a>
+        <a href="/#transition" style="font-size: 14px;">Domains</a>
+        <a href="https://github.com/humanitylastchoice/benchmark/issues/new?template=submit-a-model.md" style="font-size: 14px;">Submit a model</a>
+      </div>
+      <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 10px;">
+        <span class="ov" style="color: #867F77;">Initiative</span>
+        <a href="/about/" style="font-size: 14px;">About</a>
+        <a href="#" style="font-size: 14px;">Paper</a>
+        <a href="https://github.com/humanitylastchoice" style="font-size: 14px;">Code</a>
+        <a href="mailto:hello@humanitylastchoice.org" style="font-size: 14px;">Contact</a>
+      </div>
+    </div>
+  </footer></div>
+</body>
+</html>
