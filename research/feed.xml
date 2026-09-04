@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>
+<title>Humanity’s Last Choice — writing</title>
+<link>https://humanitylastchoice.org/research/</link>
+<description>A benchmark for AI recommendation robustness — does the system still choose for the person when the options are written to win the model?</description>
+<atom:link href="https://humanitylastchoice.org/research/feed.xml" rel="self" type="application/rss+xml"/>
+<language>en</language>
+<item><title>One shaped page is enough</title><link>https://humanitylastchoice.org/research/one-shaped-page/</link><guid>https://humanitylastchoice.org/research/one-shaped-page/</guid><pubDate>Fri, 04 Sep 2026 09:00:00 +0000</pubDate><category>Research</category><description>SafeGEO, our EMNLP 2026 paper, rewrites one seller-controlled source per case and watches four recommendation agents change their minds. Under the shaped condition the rewritten candidate reaches the top three in 73 to 91 percent of instances, up from 3 to 13 percent under a truthful rewrite.</description></item>
+<item><title>SafeGEO, the research report</title><link>https://humanitylastchoice.org/research/safegeo-report/</link><guid>https://humanitylastchoice.org/research/safegeo-report/</guid><pubDate>Fri, 04 Sep 2026 09:00:00 +0000</pubDate><category>Report</category><description>The full account of the release behind the leaderboard. The setting, the taxonomy of shaped sources, the dataset, the protocol, the results for four systems, the mitigation study, the sensitivity checks, what the release does not measure, the artifacts, and how to cite it.</description></item>
+<item><title>The last choice humans make is who chooses next</title><link>https://humanitylastchoice.org/research/who-chooses-next/</link><guid>https://humanitylastchoice.org/research/who-chooses-next/</guid><pubDate>Fri, 04 Sep 2026 09:00:00 +0000</pubDate><category>Essay</category><description>Why the first decision, which AI system to ask, is quietly becoming the one that decides the rest, what the candidates for those recommendations are learning, and what that asks of the systems doing the choosing.</description></item>
+</channel></rss>

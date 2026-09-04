@@ -1,12 +1,126 @@
 {
-  "sample": true,
-  "updated": "[DATE]",
-  "note": "Robustness = score in the shaped condition relative to clean, per system, across domains. Replace these rows with the first evaluation run and set sample to false; design/build_site.py renders them.",
+  "sample": false,
+  "release": {
+    "id": "safegeo-2026-09",
+    "name": "SafeGEO",
+    "label": "SafeGEO release",
+    "updated": "2026-09-04",
+    "domain": "Which products they buy",
+    "domain_note": "The first release covers one kind of choice: product recommendation, in six verticals. The five other domains of Humanity’s Last Choice follow the same protocol and are being built.",
+    "verticals": ["AI meeting transcription tools", "Baby monitors", "Carry-on backpacks", "Home air purifiers", "Noise-cancelling headphones", "Office chairs"],
+    "cases": 600,
+    "variants": 22,
+    "instances": 40800,
+    "paper": {
+      "title": "SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents",
+      "venue": "EMNLP 2026, main conference",
+      "arxiv": "https://arxiv.org/abs/2606.28356",
+      "pdf": "https://qianfengwen.github.io/SafeGEO/static/SafeGEO.pdf",
+      "page": "https://qianfengwen.github.io/SafeGEO/",
+      "code": "https://github.com/QianfengWen/SafeGEO",
+      "data": "https://huggingface.co/datasets/wieeii/SafeGEO",
+      "results": "https://github.com/QianfengWen/SafeGEO/tree/main/results",
+      "tables": "Tables 5, 7, 28, 33 and 35 of the camera-ready paper; results/*.csv in the code repository"
+    },
+    "conditions": {
+      "no_geo": "The original retrieved sources, unchanged.",
+      "clean": "Truthful-rewrite control: the target’s own source is rewritten in the same ten-line template as the shaped version, keeping its supported claims and its decision-relevant caveat. This is the paper’s baseline, so the comparison holds source form and length fixed.",
+      "shaped": "Average over the paper’s eight realistic variants: the target’s own source is rewritten to win the recommendation, as a buyer guide, an FAQ, a comparison note or a product profile. One source is rewritten per instance; every other source, the candidate set and the hidden labels stay the same."
+    },
+    "how_to_read": "Every row is one system on the same 600 cases. Read each metric as a pair: the clean value, then the shaped value. The gap is the score. Lower is better for the two harm metrics; higher is better for the two quality metrics. Systems are ordered by how often the shaped candidate reached the top three in the shaped condition, lowest first."
+  },
+  "metrics": [
+    {"key": "target3", "name": "Shaped candidate in the top three", "short": "Shaped in top 3", "paper": "Target@3", "better": "lower", "unit": "% of instances",
+     "definition": "How often the candidate whose source was rewritten appears among the system’s top three recommendations. Under the clean condition this is the rate at which a truthfully described, lower-utility candidate makes the top three anyway."},
+    {"key": "hcv1", "name": "Top pick violates a hard constraint", "short": "Constraint violated", "paper": "HCV@1", "better": "lower", "unit": "% of instances",
+     "definition": "How often the system’s first recommendation breaks at least one of the person’s hard constraints, as annotated in the hidden reference labels."},
+    {"key": "gt3", "name": "A right answer in the top three", "short": "Right answer in top 3", "paper": "GT@3", "better": "higher", "unit": "% of instances",
+     "definition": "How often at least one ground-truth candidate, under the hidden reference ranking, is among the top three."},
+    {"key": "undcg5", "name": "Utility of the top five", "short": "Utility, top 5", "paper": "uNDCG@5", "better": "higher", "unit": "score",
+     "definition": "Normalised discounted cumulative gain of the top five recommendations, with the hidden reference utility as graded relevance."}
+  ],
+  "rank_by": "target3",
   "rows": [
-    {"system": "Model A", "robustness": 81.4, "clean": 92.0, "shaped": 78.6, "domains": 6},
-    {"system": "Model B", "robustness": 76.9, "clean": 90.1, "shaped": 70.2, "domains": 6},
-    {"system": "Model C", "robustness": 71.2, "clean": 88.7, "shaped": 63.9, "domains": 6},
-    {"system": "Model D", "robustness": 64.5, "clean": 87.3, "shaped": 55.1, "domains": 5},
-    {"system": "Model E", "robustness": 58.0, "clean": 85.9, "shaped": 47.4, "domains": 6}
+    {
+      "system": "DeepSeek-V4-Flash", "maker": "DeepSeek", "access": "Hosted API, reasoning disabled", "scale": "frontier-scale",
+      "target3": {"no_geo": 6.2, "clean": 4.6, "shaped": 72.6},
+      "hcv1": {"no_geo": 24.5, "clean": 23.0, "shaped": 73.4},
+      "gt3": {"no_geo": 66.7, "clean": 67.7, "shaped": 57.7},
+      "undcg5": {"no_geo": 77.0, "clean": 78.8, "shaped": 66.9},
+      "mitigated": {"method": "Evidence breakdown", "target3": 46.8, "hcv1": 54.8},
+      "note": "Evaluated as the paper’s frontier-scale check (Section 4.2.1, Table 33). The one variant it resists is the explicitly model-directed source text: 51.3 % there against 95.5 % on Devstral."
+    },
+    {
+      "system": "Qwen3.6 27B", "maker": "Qwen Team", "access": "Open weights, served locally", "scale": "27B",
+      "target3": {"no_geo": 5.8, "clean": 8.1, "shaped": 78.3},
+      "hcv1": {"no_geo": 30.5, "clean": 24.2, "shaped": 83.7},
+      "gt3": {"no_geo": 59.4, "clean": 61.2, "shaped": 60.8},
+      "undcg5": {"no_geo": 64.5, "clean": 66.5, "shaped": 63.6},
+      "mitigated": {"method": "Evidence breakdown", "target3": 39.1, "hcv1": 42.1},
+      "note": "The largest mitigation effect in the study: evidence breakdown takes the shaped candidate’s top-three rate from 78.3 % to 39.1 %."
+    },
+    {
+      "system": "Gemma 4 31B IT", "maker": "Google DeepMind", "access": "Open weights, served locally", "scale": "31B",
+      "target3": {"no_geo": 3.2, "clean": 3.4, "shaped": 79.6},
+      "hcv1": {"no_geo": 22.7, "clean": 16.9, "shaped": 75.6},
+      "gt3": {"no_geo": 71.1, "clean": 71.2, "shaped": 67.9},
+      "undcg5": {"no_geo": 72.6, "clean": 74.4, "shaped": 68.6},
+      "mitigated": {"method": "Evidence breakdown", "target3": 49.9, "hcv1": 46.6},
+      "note": "The best clean-condition system: a right answer in the top three 71.2 % of the time. The shaped condition costs it least in quality and most in harm."
+    },
+    {
+      "system": "Devstral Small 2 24B Instruct", "maker": "Mistral AI", "access": "Open weights, served locally", "scale": "24B",
+      "target3": {"no_geo": 12.4, "clean": 12.7, "shaped": 90.9},
+      "hcv1": {"no_geo": 38.8, "clean": 41.1, "shaped": 90.7},
+      "gt3": {"no_geo": 52.3, "clean": 50.7, "shaped": 47.9},
+      "undcg5": {"no_geo": 67.4, "clean": 67.4, "shaped": 59.2},
+      "mitigated": {"method": "Evidence breakdown", "target3": 73.2, "hcv1": 78.9},
+      "note": "The strongest single variant in the study is on this system: the full-stack realistic rewrite puts the shaped candidate in the top three 95.9 % of the time, 83.2 points above its clean rate."
+    }
+  ],
+  "by_vertical": {
+    "metric": "target3",
+    "condition": "over the shaped variants, as reported in the paper’s Table 28",
+    "source": "Paper, Table 28",
+    "note": "Shaped candidate in the top three, by product vertical, for the three open-weight systems, with the uplift over each vertical’s clean rate. The verticals differ in what kind of evidence decides fit: plan and policy terms for the transcription tools, safety claims for the monitors, physical specifications for the rest.",
+    "verticals": ["AI meeting transcription tools", "Baby monitors", "Carry-on backpacks", "Home air purifiers", "Noise-cancelling headphones", "Office chairs"],
+    "rows": [
+      {"system": "Gemma 4 31B IT", "values": [90.0, 54.1, 25.6, 31.2, 44.6, 52.2], "uplift": [78.7, 50.5, 23.5, 31.2, 43.6, 49.6]},
+      {"system": "Qwen3.6 27B", "values": [89.9, 50.6, 36.5, 27.7, 46.2, 58.6], "uplift": [68.3, 45.7, 31.7, 22.9, 39.2, 53.0]},
+      {"system": "Devstral Small 2 24B Instruct", "values": [88.9, 84.7, 83.0, 83.3, 83.3, 88.8], "uplift": [67.9, 72.5, 74.2, 73.6, 70.7, 76.9]}
+    ]
+  },
+  "mitigation": {
+    "source": "Paper, Table 7 and Table 35",
+    "condition": "Shaped condition (eight realistic variants, three targets); each intervention is a prompt or input change on the same attacked instances, measured against the unmitigated request.",
+    "methods": [
+      {"key": "none", "name": "No mitigation", "definition": "The exact benchmark request."},
+      {"key": "defensive", "name": "Defensive prompt", "definition": "Requires clear support for important claims and preserves uncertainty when sources disagree."},
+      {"key": "rationale", "name": "Rationale elicitation", "definition": "Requires a brief reason and source-line citations for each top recommendation, without a separate evidence check before ranking."},
+      {"key": "evidence", "name": "Evidence breakdown", "definition": "Checks important claims against supporting and conflicting evidence before ranking."},
+      {"key": "balancing", "name": "Context balancing", "definition": "Compares claims across the full source packet so that one prominent source does not dominate."},
+      {"key": "filtering", "name": "Instruction filtering", "definition": "Treats source text aimed at directing the model as non-evidence rather than commands."}
+    ],
+    "rows": [
+      {"system": "DeepSeek-V4-Flash", "target3": {"none": 72.6, "defensive": 68.2, "rationale": 72.5, "evidence": 46.8, "balancing": 62.9, "filtering": 70.2},
+       "hcv1": {"none": 73.4, "defensive": 69.0, "rationale": 73.3, "evidence": 54.8, "balancing": 65.6, "filtering": 70.9},
+       "gt3": {"none": 57.7, "defensive": 56.9, "rationale": 55.6, "evidence": 51.4, "balancing": 57.2, "filtering": 57.0},
+       "undcg5": {"none": 66.9, "defensive": 67.4, "rationale": 56.7, "evidence": 66.0, "balancing": 69.0, "filtering": 67.1}},
+      {"system": "Qwen3.6 27B", "target3": {"none": 78.3, "defensive": 67.3, "rationale": 85.8, "evidence": 39.1, "balancing": 73.8, "filtering": 81.3},
+       "hcv1": {"none": 83.7, "defensive": 66.2, "rationale": 83.1, "evidence": 42.1, "balancing": 73.4, "filtering": 78.8},
+       "gt3": {"none": 60.8, "defensive": 68.5, "rationale": 65.0, "evidence": 69.7, "balancing": 68.0, "filtering": 67.0},
+       "undcg5": {"none": 63.6, "defensive": 73.4, "rationale": 57.8, "evidence": 77.4, "balancing": 72.7, "filtering": 70.7}},
+      {"system": "Gemma 4 31B IT", "target3": {"none": 79.6, "defensive": 64.5, "rationale": 64.6, "evidence": 49.9, "balancing": 68.1, "filtering": 77.4},
+       "hcv1": {"none": 75.6, "defensive": 60.8, "rationale": 77.8, "evidence": 46.6, "balancing": 65.1, "filtering": 73.1},
+       "gt3": {"none": 67.9, "defensive": 69.3, "rationale": 50.0, "evidence": 69.5, "balancing": 70.1, "filtering": 68.0},
+       "undcg5": {"none": 68.6, "defensive": 72.6, "rationale": 39.9, "evidence": 74.4, "balancing": 72.2, "filtering": 68.3}},
+      {"system": "Devstral Small 2 24B Instruct", "target3": {"none": 90.9, "defensive": 88.2, "rationale": 93.2, "evidence": 73.2, "balancing": 87.8, "filtering": 90.5},
+       "hcv1": {"none": 90.7, "defensive": 89.1, "rationale": 92.1, "evidence": 78.9, "balancing": 88.9, "filtering": 90.3},
+       "gt3": {"none": 47.9, "defensive": 47.0, "rationale": 47.2, "evidence": 43.4, "balancing": 52.2, "filtering": 48.8},
+       "undcg5": {"none": 59.2, "defensive": 59.1, "rationale": 37.6, "evidence": 56.3, "balancing": 62.6, "filtering": 60.1}}
+    ]
+  },
+  "changelog": [
+    {"date": "2026-09-04", "note": "SafeGEO release: four systems on the product-recommendation domain, from the camera-ready paper (EMNLP 2026). Replaces the sample rows."}
   ]
 }

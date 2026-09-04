@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SafeGEO, the research report — Humanity’s Last Choice</title>
+<meta name="description" content="The full account of the release behind the leaderboard. The setting, the taxonomy of shaped sources, the dataset, the protocol, the results for four systems, the mitigation study, the sensitivity checks, what the release does not measure, the artifacts, and how to cite it.">
+<link rel="canonical" href="https://humanitylastchoice.org/research/safegeo-report/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Humanity’s Last Choice">
+<meta property="og:title" content="SafeGEO, the research report">
+<meta property="og:description" content="The full account of the release behind the leaderboard. The setting, the taxonomy of shaped sources, the dataset, the protocol, the results for four systems, the mitigation study, the sensitivity checks, what the release does not measure, the artifacts, and how to cite it.">
+<meta property="og:url" content="https://humanitylastchoice.org/research/safegeo-report/">
+<meta property="og:image" content="https://humanitylastchoice.org/assets/figures/figure-08-safegeo.webp">
+<meta property="og:image:width" content="2400"><meta property="og:image:height" content="1500">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@humanlastchoice">
+<meta name="twitter:image" content="https://humanitylastchoice.org/assets/figures/figure-08-safegeo.webp">
+<meta name="theme-color" content="#F8F5F0">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="Humanity’s Last Choice — writing" href="/research/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ScholarlyArticle", "headline": "SafeGEO, the research report", "description": "The full account of the release behind the leaderboard. The setting, the taxonomy of shaped sources, the dataset, the protocol, the results for four systems, the mitigation study, the sensitivity checks, what the release does not measure, the artifacts, and how to cite it.", "datePublished": "2026-09-04", "author": {"@type": "Organization", "name": "Humanity’s Last Choice"}, "publisher": {"@type": "Organization", "name": "Humanity’s Last Choice", "url": "https://humanitylastchoice.org"}, "url": "https://humanitylastchoice.org/research/safegeo-report/", "image": "https://humanitylastchoice.org/assets/figures/figure-08-safegeo.webp"}</script>
+<style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #F8F5F0; }
+    body { font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #1D1713; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+    .serif { font-family: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif; font-optical-sizing: auto; }
+    .mono { font-family: 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace; }
+    .ov { font-family: 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; line-height: 1.2; }
+    a { color: #1D1713; text-decoration: none; }
+    a:hover { color: var(--accent, #A83630); }
+    button { font: inherit; cursor: pointer; }
+    .nav-link { font-size: 14px; font-weight: 500; color: #534B45; transition: color .15s ease; }
+    .nav-link:hover { color: #1D1713; }
+    .track { color: #1D1713; text-decoration: underline; text-decoration-color: #B6B0A7; text-underline-offset: 4px; transition: text-decoration-color .15s ease, color .15s ease; }
+    .track:hover { text-decoration-color: var(--accent, #A83630); }
+    .btn { transition: filter .15s ease, transform .15s ease; }
+    .btn:hover { filter: brightness(1.25); }
+    .btn:active { transform: translateY(1px); }
+    .btn-paper:hover { filter: brightness(0.94); color: #1D1713; }
+    .btn-ghost { transition: background .15s ease; }
+    .btn-ghost:hover { background: rgba(248,245,240,0.1); color: #F8F5F0; }
+    .arrow-link .arr { display: inline-flex; transition: transform .2s ease; }
+    .arrow-link:hover .arr { transform: translateX(4px); }
+    .row-link { transition: background .15s ease; }
+    .row-link:hover { background: #F0ECE4; }
+    .cell { transition: background .2s ease; }
+    .cell:hover { background: #F0ECE4; }
+    .card-link { transition: transform .35s cubic-bezier(.2,.65,.2,1); }
+    .card-link:hover { transform: translateY(-4px); }
+    .card-link:hover .card-title { text-decoration: underline; text-decoration-color: #B6B0A7; text-underline-offset: 5px; }
+    .tab { transition: background .15s ease, color .15s ease, border-color .15s ease; }
+    .tab:hover { border-color: #1D1713; }
+    .page::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: .07; mix-blend-mode: multiply; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    .reveal { opacity: 0; animation: rise .8s cubic-bezier(.2,.65,.2,1) forwards; }
+    .pop { opacity: 0; animation: rise .55s cubic-bezier(.2,.65,.2,1) forwards; }
+    .fade { opacity: 0; animation: fade .5s ease forwards; }
+    .draw { animation: draw 1s cubic-bezier(.45,0,.2,1) forwards; }
+    .panel { animation: rise .5s cubic-bezier(.2,.65,.2,1); }
+
+    [data-io] { opacity: 0; transform: translateY(18px); transition: opacity .9s cubic-bezier(.2,.65,.2,1), transform .9s cubic-bezier(.2,.65,.2,1); transition-delay: calc(var(--i, 0) * 90ms); }
+    [data-io].in { opacity: 1; transform: none; }
+    .bar-fill { transform: scaleX(0); transform-origin: left center; transition: transform 1.4s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i, 0) * 120ms + .2s); }
+    .in .bar-fill { transform: scaleX(1); }
+    .sweep { background-image: linear-gradient(var(--accent-soft, #EEDED9), var(--accent-soft, #EEDED9)); background-repeat: no-repeat; background-size: 0% 100%; transition: background-size 1.6s cubic-bezier(.2,.7,.2,1) .4s; }
+    .in .sweep { background-size: 100% 100%; }
+
+    @keyframes travel { 0% { offset-distance: 0%; opacity: 0; } 2% { opacity: 1; } 9% { opacity: 1; } 10% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
+    .traveler { offset-rotate: 0deg; animation: travel 13.2s cubic-bezier(.5,0,.3,1) infinite; }
+    @keyframes travel-stem { 0% { offset-distance: 0%; opacity: 0; } 6% { opacity: 1; } 52% { opacity: 1; } 58% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
+    .traveler-stem { offset-rotate: 0deg; animation: travel-stem 2.2s cubic-bezier(.5,0,.3,1) infinite; }
+    @keyframes rowglow { 0%, 9.5% { color: #1D1713; } 10.5% { color: var(--accent, #A83630); } 21% { color: var(--accent, #A83630); } 30%, 100% { color: #1D1713; } }
+    .rowglow { animation: rowglow 13.2s linear infinite; }
+    @keyframes march { to { stroke-dashoffset: -14; } }
+    .march { animation: march .9s linear infinite; }
+    @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+    .breathe { animation: breathe 2.2s ease-in-out infinite; transform-origin: center; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+    .pulse { animation: pulse 2.2s ease-in-out infinite; }
+    .pop.rowglow { animation: rise .55s cubic-bezier(.2,.65,.2,1) forwards, rowglow 13.2s linear infinite; }
+    .fade.march { animation: fade .5s ease forwards, march .9s linear infinite; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .pop, .fade, .panel { animation: none; opacity: 1; }
+      .draw { animation: none; stroke-dashoffset: 0 !important; }
+      [data-io] { opacity: 1; transform: none; transition: none; }
+      .bar-fill { transform: none; transition: none; }
+      .sweep { background-size: 100% 100%; transition: none; }
+      .traveler, .traveler-stem, .rowglow, .march, .breathe, .pulse { animation: none; }
+    }
+  
+.btn, .arrow-link, .btn-ghost { white-space: nowrap; }
+.tab[aria-selected="true"] { background: #1D1713 !important; color: #F8F5F0 !important; border-color: #1D1713 !important; }
+.panel-wrap[hidden] { display: none; }
+.nav-toggle { display: none; width: 40px; height: 40px; border: 1px solid #D5D0C8; border-radius: 3px; background: transparent; padding: 0; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+.nav-toggle span { display: block; width: 16px; height: 1.5px; background: #1D1713; }
+header.open nav { display: flex !important; }
+/* ---- article pages ---- */
+.post { max-width: 1440px; margin: 0 auto; padding: 72px 112px 96px; }
+.post .lede { max-width: 720px; font-size: 21px; line-height: 1.55; color: #534B45; margin: 22px 0 0; }
+.post-body { max-width: 720px; }
+.post-body p { margin: 0 0 20px; font-size: 18.5px; line-height: 1.62; color: #2E2823; }
+.post-body h2 { font-family: 'Newsreader', 'Iowan Old Style', serif; font-optical-sizing: auto; font-weight: 400; font-size: 32px; line-height: 1.15; letter-spacing: -0.015em; margin: 52px 0 18px; }
+.post-body h3 { font-family: 'Newsreader', 'Iowan Old Style', serif; font-optical-sizing: auto; font-weight: 500; font-size: 23px; line-height: 1.25; margin: 36px 0 14px; }
+.post-body ul, .post-body ol { margin: 0 0 20px; padding-left: 22px; }
+.post-body li { margin: 0 0 10px; font-size: 17.5px; line-height: 1.58; color: #2E2823; }
+.post-body a { color: #1D1713; text-decoration: underline; text-decoration-color: #B6B0A7; text-underline-offset: 3px; }
+.post-body a:hover { text-decoration-color: #A83630; color: #A83630; }
+.post-body strong { font-weight: 600; color: #1D1713; }
+.post-body blockquote { margin: 0 0 22px; padding: 4px 0 4px 22px; border-left: 2px solid #A83630; }
+.post-body blockquote p { font-family: 'Newsreader', serif; font-optical-sizing: auto; font-size: 20px; line-height: 1.5; color: #1D1713; margin: 0 0 8px; }
+.post-body code, .about-body code { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.9em; background: #F0ECE4; padding: 1px 5px; border-radius: 3px; }
+.post-body pre { margin: 0 0 22px; padding: 18px 20px; background: #F0ECE4; border: 1px solid #D5D0C8; border-radius: 4px; overflow-x: auto; }
+.post-body pre code { background: none; padding: 0; font-size: 13.5px; line-height: 1.55; }
+.post-body hr { border: 0; border-top: 1px solid #D5D0C8; margin: 36px 0; }
+.post-body aside.note { margin: 0 0 26px; padding: 18px 22px; border: 1px solid #D5D0C8; border-radius: 4px; background: #F0ECE4; }
+.post-body aside.note p { font-size: 15.5px; line-height: 1.55; color: #534B45; margin: 0 0 8px; }
+.post-body aside.note p:last-child { margin-bottom: 0; }
+.post-body figure { margin: 0 0 26px; }
+.post-body figure img { display: block; width: 100%; height: auto; border: 1px solid #D5D0C8; border-radius: 4px; }
+.post-body figcaption, .post .credit { margin-top: 10px; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 12px; line-height: 1.5; color: #867F77; letter-spacing: .02em; }
+.post-body table, .lb-page table { width: 100%; border-collapse: collapse; font-size: 14.5px; line-height: 1.45; }
+.post-body th, .lb-page th { text-align: left; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; color: #867F77; padding: 10px 14px 10px 0; border-bottom: 1px solid #1D1713; vertical-align: bottom; }
+.post-body td, .lb-page td { padding: 11px 14px 11px 0; border-bottom: 1px solid #D5D0C8; vertical-align: top; color: #2E2823; }
+.post-body td:first-child, .lb-page td:first-child { font-weight: 500; color: #1D1713; }
+.post-body .table-wrap { margin: 0 0 8px; overflow-x: auto; }
+.post-body .table-wrap + p em, .post-body .table-wrap + p { font-size: 13px; color: #867F77; line-height: 1.5; }
+.post-body .table-wrap + p { margin-bottom: 28px; }
+.toc { max-width: 720px; margin: 0 0 40px; padding: 18px 22px; border: 1px solid #D5D0C8; border-radius: 4px; }
+.toc ol { margin: 8px 0 0; padding-left: 20px; columns: 2; column-gap: 32px; }
+.toc li { font-size: 14.5px; line-height: 1.5; margin: 0 0 6px; break-inside: avoid; }
+.post-hero { margin: 44px 0 40px; }
+.post-hero img { display: block; width: 100%; height: auto; border: 1px solid #D5D0C8; border-radius: 4px; }
+.post-meta { display: flex; flex-wrap: wrap; gap: 10px 18px; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 12px; color: #867F77; letter-spacing: .04em; }
+.post-meta .kind { color: #A83630; }
+.post-foot { max-width: 720px; margin-top: 56px; padding-top: 28px; border-top: 1px solid #D5D0C8; display: flex; flex-wrap: wrap; gap: 12px 28px; }
+/* ---- research index ---- */
+.research-list { border-top: 1px solid #1D1713; }
+.research-item { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 0 40px; padding: 32px 0; border-bottom: 1px solid #D5D0C8; color: #1D1713; align-items: start; }
+.research-item img { display: block; width: 100%; height: auto; border: 1px solid #D5D0C8; border-radius: 4px; }
+.papers { border-top: 1px solid #1D1713; }
+.paper-row { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 0 32px; padding: 26px 0; border-bottom: 1px solid #D5D0C8; }
+/* ---- leaderboard page ---- */
+.lb-page .lb-main { display: grid; grid-template-columns: 48px minmax(220px, 1.4fr) minmax(300px, 2fr) repeat(3, minmax(120px, 1fr)); gap: 0 20px; align-items: center; }
+.lb-page .lb-head { padding: 14px 0; border-bottom: 1px solid #D5D0C8; color: #867F77; font-size: 11px; align-items: end; }
+.lb-page .lb-row { min-height: 72px; padding: 14px 0; border-bottom: 1px solid #D5D0C8; }
+.lb-page .pair { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 14px; color: #867F77; white-space: nowrap; }
+.lb-page .pair b { font-weight: 500; color: #1D1713; }
+.lb-page .pair .s { color: #A83630; font-weight: 500; }
+.lb-page .sysname { font-size: 16px; font-weight: 500; }
+.lb-page .sysmeta { margin-top: 4px; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11.5px; color: #867F77; letter-spacing: .02em; }
+.lb-page .track { position: relative; height: 6px; border-radius: 3px; background: #E7E2D9; width: 100%; max-width: 260px; }
+.lb-page .track .fill { height: 100%; border-radius: 3px; background: #A83630; }
+.lb-page .track .tick { position: absolute; top: -5px; width: 2px; height: 16px; background: #1D1713; }
+.lb-page .track .mit { position: absolute; top: -4px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: #F8F5F0; border: 2px solid #1D1713; box-sizing: border-box; }
+.lb-page .lb-notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 40px; }
+.lb-page .lb-notes p { margin: 10px 0 0; font-size: 15px; line-height: 1.55; color: #534B45; }
+.lb-page .table-wrap { overflow-x: auto; }
+.lb-page td.num, .lb-page th.num { text-align: right; font-family: 'IBM Plex Mono', Menlo, monospace; font-variant-numeric: tabular-nums; }
+.lb-page td.hi { color: #A83630; font-weight: 500; }
+.lb-page .def { display: grid; grid-template-columns: 56px 300px 120px minmax(0, 1fr); gap: 0 24px; padding: 20px 0; border-bottom: 1px solid #D5D0C8; align-items: start; }
+/* ---- responsive: values from design/Mobile.dc.html ---- */
+@media (max-width: 900px) {
+  .page { min-width: 0 !important; }
+  header > div { padding: 0 20px !important; height: 56px !important; position: relative; }
+  header nav { display: none !important; position: absolute; left: 0; right: 0; top: 56px; flex-direction: column; align-items: stretch !important; gap: 0 !important; background: #F8F5F0; border-bottom: 1px solid #D5D0C8; padding: 8px 20px 14px; }
+  header nav a { padding: 12px 0; border-top: 1px solid #E7E2D9; font-size: 16px !important; }
+  header .btn { display: none !important; }
+  .nav-toggle { display: flex; }
+  section, footer > div { padding-left: 20px !important; padding-right: 20px !important; }
+  section > div[style*="padding: 112px 112px"], section > div[style*="padding: 96px 112px"] { padding-left: 20px !important; padding-right: 20px !important; }
+  [style*="grid-template-columns: repeat(12"] { display: block !important; }
+  [style*="grid-column"] { padding-top: 0 !important; margin-top: 18px; }
+  [style*="grid-template-columns: repeat(6"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  [style*="grid-template-columns: repeat(6"] > .cell { padding: 18px 12px 20px 0 !important; border-bottom: 1px solid #D5D0C8; }
+  [style*="grid-template-columns: repeat(6"] > .cell:nth-child(even) { padding-left: 16px !important; border-left: 1px solid #D5D0C8 !important; }
+  [style*="grid-template-columns: repeat(6"] > .cell:nth-child(odd) { border-left: 0 !important; }
+  [style*="grid-template-columns: repeat(3"], [style*="grid-template-columns: repeat(2"] { grid-template-columns: minmax(0, 1fr) !important; }
+  #top { padding: 44px 20px 36px !important; }
+  #top h1 { font-size: 40px !important; }
+  #top .arrow-link, #top .btn { width: 100%; justify-content: center; }
+  .fig1-wrap { width: 100% !important; height: auto !important; aspect-ratio: 2 / 1; }
+  section > div[style*="display: flex; align-items: stretch"] { flex-direction: column !important; }
+  section > div[style*="display: flex; align-items: stretch"] > div:last-child { padding-left: 0 !important; border-left: 0 !important; padding-top: 20px; border-top: 1px solid #D5D0C8; }
+  .tab-row { overflow-x: auto; margin-right: -20px; padding-right: 20px; }
+  .tab-row .tab { flex: none; }
+  .tab-row > span { display: none !important; }
+  .lb-row, .ov[style*="56px minmax(0, 1fr) 400px"] { grid-template-columns: 32px minmax(0, 1fr) !important; height: auto !important; padding: 12px 0; row-gap: 6px; }
+  .lb-row > div[style*="gap: 14px"] { grid-column: 2; }
+  .lb-extra, .ov[style*="56px minmax(0, 1fr) 400px"] > span:nth-child(n+3) { display: none !important; }
+  .lb-track { width: 120px !important; }
+  #leaderboard div[style*="margin-top: 28px; display: flex"] { flex-direction: column !important; align-items: flex-start !important; gap: 14px !important; }
+  [data-slot="metrics"] > div { grid-template-columns: 32px minmax(0, 1fr) !important; row-gap: 6px; }
+  [data-slot="metrics"] > div > span:nth-child(n+3) { grid-column: 2; }
+  [data-slot="metrics"] > .ov > span:nth-child(n+3) { display: none; }
+  h2.serif { font-size: 30px !important; }
+  section[style*="background: #1D1713"] h2 { font-size: 36px !important; }
+  footer > div { padding: 32px 20px 44px !important; }
+  .post { padding: 40px 20px 64px; }
+  .post h1 { font-size: 34px !important; }
+  .post .lede { font-size: 18px; }
+  .post-body p { font-size: 17px; }
+  .toc ol { columns: 1; }
+  .research-item { grid-template-columns: minmax(0, 1fr); gap: 16px 0; }
+  .paper-row { grid-template-columns: minmax(0, 1fr); }
+  .lb-page .lb-main { grid-template-columns: 32px minmax(0, 1fr) !important; row-gap: 8px; }
+  .lb-page .lb-main > :nth-child(n+3) { grid-column: 2; }
+  .lb-page .lb-head > :nth-child(n+3) { display: none; }
+  .lb-page .lb-row .pair::before { content: attr(data-label); display: block; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: #867F77; margin-bottom: 2px; }
+  .lb-page .lb-notes { grid-template-columns: minmax(0, 1fr); }
+  .lb-page .def { grid-template-columns: 32px minmax(0, 1fr); row-gap: 6px; }
+  .lb-page .def > :nth-child(n+3) { grid-column: 2; }
+  .lb-page .def.ov > :nth-child(n+3) { display: none; }
+  .about h1 { font-size: 36px !important; }
+  .about-body p.about-thesis { font-size: 30px; }
+}
+</style>
+</head>
+<body>
+<div class="page " style="--accent: #A83630; --accent-deep: #892f2a; --accent-soft: #eeded9; position: relative; width: 100%; background: #F8F5F0; color: #1D1713;"><header style="position: sticky; top: 0; z-index: 20; background: rgba(248, 245, 240, 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid #D5D0C8;">
+    <div style="max-width: 1440px; margin: 0 auto; padding: 0 112px; height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 32px;">
+      <a href="/" style="display: flex; align-items: center; gap: 12px; color: #1D1713;">
+        <svg width="49" height="22" viewBox="0 88 240 108" fill="none" style="flex: none;">
+          <g stroke="#1D1713" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke-width="11" d="M36 118 C 26 118, 16 120, 6 124"></path>
+            <path stroke-width="11" d="M36 182 C 26 184, 16 186, 6 190"></path>
+            <path stroke-width="11" d="M36 118 C 58 108, 84 104, 100 108 C 116 106, 130 106, 142 108 C 150 109, 150 121, 142 122 C 130 122, 116 124, 104 126"></path>
+            <path stroke-width="11" d="M104 126 C 110 138, 102 148, 92 146 C 100 160, 92 170, 80 166 C 86 178, 76 188, 62 182 C 52 178, 44 182, 36 182"></path>
+            <path stroke-width="9" d="M74 110 C 80 96, 98 94, 104 106"></path>
+          </g>
+          <path d="M162 115 L 198 151 L 199 133 L 224 143 L 228 132 L 204 124 L 215 113 Z" fill="#1D1713" stroke="#1D1713" stroke-width="7" stroke-linejoin="round"></path>
+        </svg>
+        <span class="serif" style="font-size: 21px; font-weight: 500; letter-spacing: -0.005em; line-height: 1;">Humanity's Last Choice</span>
+      </a>
+      <nav style="display: flex; align-items: center; gap: 28px;">
+        <a class="nav-link" href="/research/">Research</a>
+        <a class="nav-link" href="/benchmark/">Benchmark</a>
+        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+        <a class="nav-link" href="/about/">About</a>
+        <a class="nav-link" href="https://arxiv.org/abs/2606.28356">Paper</a>
+        <a class="nav-link" href="https://github.com/humanitylastchoice">Code</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+      <a class="btn" href="/leaderboard/" style="display: inline-flex; align-items: center; height: 40px; padding: 0 16px; border-radius: 3px; background: #1D1713; color: #F8F5F0; font-size: 14px; font-weight: 500;">See the leaderboard</a>
+    </div>
+  </header><article class="post"><header><div class="post-meta"><span class="kind">Report</span><span>2026-09-04</span><span>SafeGEO (EMNLP 2026)</span><span>18 min read</span></div><h1 class="serif" style="margin: 22px 0 0; max-width: 900px; font-size: 56px; line-height: 1.04; font-weight: 400; letter-spacing: -0.02em; text-wrap: pretty;">SafeGEO, the research report</h1><p class="lede">The full account of the release behind the leaderboard. The setting, the taxonomy of shaped sources, the dataset, the protocol, the results for four systems, the mitigation study, the sensitivity checks, what the release does not measure, the artifacts, and how to cite it.</p></header><div class="post-hero" data-io=""><img class="" src="/assets/figures/figure-08-safegeo.webp" srcset="/assets/figures/figure-08-safegeo-1200.webp 1200w, /assets/figures/figure-08-safegeo.webp 2400w" sizes="(max-width: 900px) calc(100vw - 40px), min(1216px, calc(100vw - 224px))" width="1200" height="750" alt="Four pairs of bars, clean and shaped, one per system. The shaped bars, in madder, reach 73 to 91 percent; the clean bars stay under 13. A cursor lands on the tallest." loading="eager" decoding="async" fetchpriority="high"></div><nav class="toc"><div class="ov" style="color: #867F77;">Contents</div><ol><li><a href="#1-summary">Summary</a></li><li><a href="#2-the-question">The question</a></li><li><a href="#3-setting-and-protocol">Setting and protocol</a></li><li><a href="#4-the-taxonomy-of-shaped-sources">The taxonomy of shaped sources</a></li><li><a href="#5-the-dataset">The dataset</a></li><li><a href="#6-results">Results</a></li><li><a href="#7-mitigation">Mitigation</a></li><li><a href="#8-what-this-release-does-not-measure">What this release does not measure</a></li><li><a href="#9-artifacts">Artifacts</a></li><li><a href="#10-how-to-cite">How to cite</a></li><li><a href="#11-provenance">Provenance</a></li></ol></nav><div class="post-body"><aside class="note"><p>This report restates the camera-ready paper <em>SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents</em> (Qianfeng Wen, Yifan Simon Liu, Xin Liu, Difan Jiao, Blair Yang, Junda Wu, Zhenwei Tang; EMNLP 2026, main conference) in the vocabulary of Humanity’s Last Choice. Every number was transcribed from the paper’s tables and the aggregate CSV files in its code repository on 2026-09-04. The paper says <em>attack</em>; this report says <em>shaped</em>, and gives the paper’s metric names beside ours. For a shorter account, read <a href="/research/one-shaped-page/">One shaped page is enough</a>.</p></aside>
+<h2 id="1-summary">1. Summary</h2>
+<ul><li><strong>Setting.</strong> A recommendation agent reads a fixed packet of retrieved web sources about a shortlist of products and returns a ranked recommendation with citations. One seller-controlled source in the packet is rewritten; everything else is held fixed.</li><li><strong>Scale.</strong> 600 requests in six product verticals; 22 shaped variants and two controls; three sampled targets per request; 40,800 evaluation instances. Four systems: Gemma 4 31B IT, Qwen3.6 27B, Devstral Small 2 24B Instruct, and DeepSeek-V4-Flash as a frontier-scale check.</li><li><strong>Headline pair.</strong> Averaged over the eight realistic variants, the shaped candidate reaches the top three in 72.6 to 90.9 percent of instances, against 3.4 to 12.7 percent under a truthful rewrite of the same source. The first recommendation violates one of the person’s hard constraints in 73.4 to 90.7 percent of instances, against 16.9 to 41.1 percent.</li><li><strong>Mechanism.</strong> Shaped sources work by being cited. The misleading-line citation rate and the shaped candidate’s top-three rate move together across variants (Pearson r = 0.91 for Gemma 4 31B IT, 0.99 for DeepSeek-V4-Flash), and paired responses show the route: a shifted citation, a missed product gap, a promotion.</li><li><strong>Mitigation.</strong> Five prompt-level or input-level interventions were tested on the same instances. A candidate-level evidence breakdown before ranking is the strongest on every system, lowering the shaped candidate’s top-three rate by 17.7 to 39.2 points. None restores the clean rate.</li></ul>
+<h2 id="2-the-question">2. The question</h2>
+<p>A recommendation is utility-aligned when it puts the candidates that satisfy the person’s hard constraints first and orders them by how well they meet the person’s preferences. The paper writes this down: each request carries hidden hard constraints, soft preferences and preference weights; each candidate carries canonical attributes; a reference utility and a reference ranking follow from them and are never shown to the system under test.</p>
+<p>A shaped source is a rewrite of one candidate’s own source, intended to promote that candidate although it is inferior under the reference ordering or violates a hard constraint. The rewrite changes the text; it does not change the product. Harm is when the rewrite moves such a candidate up the ranking. That is the failure the benchmark measures, and it is different from the visibility that earlier work on generative engine optimisation measured: whether rewritten content gets cited or surfaced at all.</p>
+<figure><img src="/assets/paper/teaser.png" alt="The paper’s Figure 1. Left: a recommendation agent takes a request, searches product pages, reviews and platforms, and returns a final recommendation. Right: a shaped source changes what a document says, how supported it looks, and how it reaches the model." loading="lazy" decoding="async"><figcaption>Figure 1 of the paper. Left, the agent: a request, a search over product pages, reviews and platforms, a ranked recommendation. Right, the three places a seller-controlled source can be shaped. Figure by the authors.</figcaption></figure>
+<h2 id="3-setting-and-protocol">3. Setting and protocol</h2>
+<p><strong>The agent.</strong> The evaluated system receives a request, a candidate shortlist, product metadata and a packet of sources, and must return a ranked list with a short rationale and citations, as structured output. Retrieval, candidate generation and source selection are fixed, so the benchmark isolates the generation stage.</p>
+<p><strong>Three conditions.</strong> Every instance exists in one of three forms of the target’s own source.</p>
+<div class="table-wrap"><table><thead><tr><th>Condition</th><th>What the target’s source is</th><th>Role</th></tr></thead><tbody><tr><td>No rewrite</td><td>The original retrieved source, unchanged</td><td>Reference point</td></tr><tr><td>Clean (the paper’s truthful-rewrite control)</td><td>The same ten-line template as the shaped version, keeping the supported claims and the decision-relevant caveat</td><td>Baseline for every gap reported here; holds form and length fixed</td></tr><tr><td>Shaped</td><td>The template with the lines of the active primitives rewritten to win the recommendation</td><td>The condition under test</td></tr></tbody></table></div>
+<p>Source lengths are matched: on average 3,911 words under no rewrite, 3,905 under the clean condition and 3,925 under the shaped condition, over all 22 variants. The effect is not a longer page.</p>
+<p><strong>The template.</strong> Every controlled source has ten lines with fixed roles: title and source type, framing, positioning, the caveat or claim, a positive note, a verification note, a comparison reminder, a boundary reminder, a statement of source authority, and a format note. A variant may overwrite only the lines its primitives are allowed to touch; the rest stay as truthful anchors. The paper’s Figure 8 shows a full pair for one instance.</p>
+<p><strong>Four measures.</strong> Percent of instances unless noted.</p>
+<div class="table-wrap"><table><thead><tr><th>Ours</th><th>Paper</th><th>Definition</th><th>Better</th></tr></thead><tbody><tr><td>Shaped candidate in the top three</td><td>Target@3</td><td>The candidate whose source was rewritten is among the top three recommendations</td><td>lower</td></tr><tr><td>Top pick violates a hard constraint</td><td>HCV@1</td><td>The first recommendation breaks at least one hidden hard constraint</td><td>lower</td></tr><tr><td>A right answer in the top three</td><td>GT@3</td><td>At least one ground-truth candidate under the reference ranking is in the top three</td><td>higher</td></tr><tr><td>Utility of the top five</td><td>uNDCG@5</td><td>Normalised discounted cumulative gain of the top five, with the reference utility as graded relevance</td><td>higher</td></tr></tbody></table></div>
+<p><strong>Four systems.</strong> Gemma 4 31B IT, Qwen3.6 27B and Devstral Small 2 24B Instruct are open-weight models in the 24B to 31B range, served locally with vLLM. DeepSeek-V4-Flash is queried through a hosted OpenAI-compatible API with reasoning disabled and a 4,096-token output cap. All run at temperature 0 with structured output enforced.</p>
+<h2 id="4-the-taxonomy-of-shaped-sources">4. The taxonomy of shaped sources</h2>
+<p>Seven primitives in three loci, drawn from the literatures on information manipulation, persuasion and prompt injection, and kept only where a primitive could be realised as a controlled source rewrite that leaves the canonical attributes fixed.</p>
+<div class="table-wrap"><table><thead><tr><th>Locus</th><th>Primitive</th><th>What it does</th><th>Example</th></tr></thead><tbody><tr><td>What the page says</td><td>Unsupported fit claim</td><td>Claims the target satisfies a requirement without valid support</td><td>Claims lowest-plan single sign-on when it is unavailable</td></tr><tr><td></td><td>Caveat omission</td><td>Omits a limitation that affects fit</td><td>Hides that a required feature is enterprise-only</td></tr><tr><td></td><td>Relevance flooding</td><td>Adds positive but weakly relevant content</td><td>Emphasises awards or adoption over the person’s needs</td></tr><tr><td>How supported it looks</td><td>Authority laundering</td><td>Makes seller-affiliated content appear independent or authoritative</td><td>Styles a seller page as a buyer guide</td></tr><tr><td></td><td>Evidence padding</td><td>Adds evidence-like language without direct support</td><td>Vague benchmark or expert phrasing</td></tr><tr><td>How it reaches the model</td><td>Salience manipulation</td><td>Makes the target more prominent to the model</td><td>FAQ snippets, repeated query terms</td></tr><tr><td></td><td>Model-directed instruction</td><td>Adds text aimed at controlling the model</td><td>Tells AI assistants to rank or cite the target first</td></tr></tbody></table></div>
+<p>The primitives are instantiated as 22 variants in four families.</p>
+<div class="table-wrap"><table><thead><tr><th>Family</th><th>Variants</th><th>What they are</th></tr></thead><tbody><tr><td>Atomic</td><td>7</td><td>One primitive each</td></tr><tr><td>Block</td><td>3</td><td>All the primitives of one locus</td></tr><tr><td>Cross-block</td><td>4</td><td>The three pairs of loci, and all three loci at once (the full-stack diagnostic)</td></tr><tr><td>Realistic</td><td>8</td><td>Coherent documents a seller might publish: caveat-buried FAQ, popularity-heavy profile, citation-padded note, independent buyer guide, false-fit checklist, selective comparison note, AI-directed source text, full-stack realistic</td></tr></tbody></table></div>
+<p>The realistic family is the one the headline numbers use. The full variant-by-primitive matrix is Table 3 of the paper and the taxonomy document in the code repository.</p>
+<h2 id="5-the-dataset">5. The dataset</h2>
+<p><strong>Verticals.</strong> AI meeting transcription tools, baby monitors, carry-on backpacks, home air purifiers, noise-cancelling headphones, office chairs. They were chosen so that requests carry verifiable constraints, fit depends on source-grounded evidence and canonical attributes, and the evidence takes different forms across verticals: policy and plan terms, safety claims, technical specifications, physical compatibility, review-based fit. One hundred requests per vertical were written by hand.</p>
+<p><strong>Discovery.</strong> Candidates, sources and metadata come from the candidate-search trace of a production shopping agent, used only for product discovery and source collection. The discovered candidates become the shortlist; the opened sources, from product pages and reviews to comparison pages and specification pages, become the packet.</p>
+<p><strong>Construction statistics</strong> (paper, Table 8).</p>
+<div class="table-wrap"><table><thead><tr><th>Component</th><th>Count</th></tr></thead><tbody><tr><td>Base cases</td><td>600 (100 per vertical)</td></tr><tr><td>Candidate records</td><td>11,974 (mean 19.96 per case)</td></tr><tr><td>Original retrieved sources</td><td>21,513 (mean 35.85 per case)</td></tr><tr><td>Annotated original-source lines</td><td>89,286</td></tr><tr><td>Sampled targets</td><td>3 per case (1,800)</td></tr><tr><td>Variants and controls</td><td>22 + 2</td></tr><tr><td>Evaluation instances</td><td>40,800 (68 per case)</td></tr><tr><td>Realistic subset</td><td>15,600 (26 per case)</td></tr><tr><td>Controlled seller-source documents</td><td>41,400, ten primary lines each</td></tr><tr><td>Controlled-source line records</td><td>414,000</td></tr><tr><td>Visible packet</td><td>exactly 22 documents per instance, mean 11.50 lines per document</td></tr></tbody></table></div>
+<p><strong>Hidden labels.</strong> A query-decomposition step extracts only the requirements and preferences the request states. A verification step fills each candidate’s canonical attributes only where the supplied sources support them, and keeps missing or conflicting evidence as missing or conflicting. Each source span is labelled for its relation to a product claim: supports, refutes, insufficiently supports, or irrelevant. The labels were produced with GPT-5.5 and audited by two independent annotators on 60 cases stratified by vertical (paper, Table 15): agreement between the annotators was 100 percent on hard-requirement extraction, 91.7 percent on the top candidate, 78.1 percent on pairwise utility ordering, 76.7 percent on candidate hard status, and 80.3 to 88.9 percent on the three line-level labels; the model’s agreement with each annotator was of the same size.</p>
+<p><strong>Targets.</strong> For each case, three eligible candidates that are not ground truth are sampled as targets. Each target is crossed with every variant and both controls, and each instance rewrites that target’s source only.</p>
+<figure><img src="/assets/paper/construction.png" alt="The paper’s Figure 2: the construction pipeline from 600 requests and a shopping-agent trace, through hidden utility and evidence annotations, to shaped instances and evaluation." loading="lazy" decoding="async"><figcaption>Figure 2 of the paper. From 600 requests in six verticals and a production shopping agent’s search trace to candidate sets, hidden labels, three sampled targets, one rewritten source per instance, and 40,800 instances. Figure by the authors.</figcaption></figure>
+<p><strong>SafeGEO Diamond.</strong> A 600-instance screening split from 120 cases, 20 per vertical, each contributing both controls and the three realistic variants with the highest DeepSeek-V4-Flash top-three rate on the full benchmark (selective comparison note, false-fit checklist, citation-padded note). It is a high-effect stress set for cheap iteration; population-level numbers should use the full benchmark.</p>
+<h2 id="6-results">6. Results</h2>
+<h3 id="6-1-four-systems-four-measures">6.1 Four systems, four measures</h3>
+<p>Clean is the truthful-rewrite control; shaped is the average over the eight realistic variants. Percent of instances. Paper, Table 5 and Table 33; the no-rewrite reference is on the <a href="/leaderboard/">leaderboard</a>.</p>
+<div class="table-wrap"><table><thead><tr><th>System</th><th>Shaped in top 3, clean → shaped</th><th>Constraint violated, clean → shaped</th><th>Right answer in top 3, clean → shaped</th><th>Utility, top 5, clean → shaped</th></tr></thead><tbody><tr><td>DeepSeek-V4-Flash</td><td>4.6 → 72.6</td><td>23.0 → 73.4</td><td>67.7 → 57.7</td><td>78.8 → 66.9</td></tr><tr><td>Qwen3.6 27B</td><td>8.1 → 78.3</td><td>24.2 → 83.7</td><td>61.2 → 60.8</td><td>66.5 → 63.6</td></tr><tr><td>Gemma 4 31B IT</td><td>3.4 → 79.6</td><td>16.9 → 75.6</td><td>71.2 → 67.9</td><td>74.4 → 68.6</td></tr><tr><td>Devstral Small 2 24B Instruct</td><td>12.7 → 90.9</td><td>41.1 → 90.7</td><td>50.7 → 47.9</td><td>67.4 → 59.2</td></tr></tbody></table></div>
+<p>Two things are visible at once. The harm measures move by 60 to 80 points. The quality measures move by a few points, because the shaped candidate usually joins the top three rather than displacing every right answer; a ranking can be mostly right and still lead with the product that cannot do what was asked.</p>
+<h3 id="6-2-by-family-and-variant">6.2 By family and variant</h3>
+<p>Coherent documents beat combinations of primitives. Shaped candidate in the top three, percent, over all variants of each family (paper, Table 24 and Section C.7).</p>
+<div class="table-wrap"><table><thead><tr><th>Family</th><th>Gemma 4 31B IT</th><th>Qwen3.6 27B</th><th>Devstral Small 2 24B</th><th>DeepSeek-V4-Flash</th></tr></thead><tbody><tr><td>Atomic (7)</td><td>48.2</td><td>49.0</td><td>79.4</td><td>57.4</td></tr><tr><td>Block (3)</td><td>40.7</td><td>47.6</td><td>84.9</td><td>55.2</td></tr><tr><td>Cross-block (4)</td><td>34.2</td><td>40.9</td><td>90.2</td><td>61.8</td></tr><tr><td>Realistic (8)</td><td>79.6</td><td>78.3</td><td>90.9</td><td>72.6</td></tr><tr><td>All 22</td><td>56.0</td><td>58.0</td><td>86.3</td><td>63.4</td></tr></tbody></table></div>
+<p>For the two systems with headroom, stacking primitives without a coherent source form does worse than a single primitive. Devstral Small 2 24B Instruct is near ceiling under every family.</p>
+<p>Within the realistic family, the strongest variant is the selective comparison note on three systems (84.0 percent on Gemma 4 31B IT, 82.2 on Qwen3.6 27B, 82.3 on DeepSeek-V4-Flash) and the full-stack realistic rewrite on Devstral (95.9 percent, 83.2 points above its clean rate, the largest gap in the study). The weakest realistic variant on DeepSeek-V4-Flash is the AI-directed source text, at 51.3 percent against 95.5 on Devstral; among single primitives on that system, salience manipulation (70.9), caveat omission (67.8) and evidence padding (66.7) are the strongest, and model-directed instruction (42.4) and relevance flooding (42.9) the weakest.</p>
+<h3 id="6-3-by-vertical">6.3 By vertical</h3>
+<p>Shaped candidate in the top three, percent, by product vertical, for the three open-weight systems, with the uplift over the vertical’s clean rate in brackets (paper, Table 28).</p>
+<div class="table-wrap"><table><thead><tr><th>Vertical</th><th>Gemma 4 31B IT</th><th>Qwen3.6 27B</th><th>Devstral Small 2 24B</th></tr></thead><tbody><tr><td>AI meeting transcription tools</td><td>90.0 (78.7)</td><td>89.9 (68.3)</td><td>88.9 (67.9)</td></tr><tr><td>Baby monitors</td><td>54.1 (50.5)</td><td>50.6 (45.7)</td><td>84.7 (72.5)</td></tr><tr><td>Carry-on backpacks</td><td>25.6 (23.5)</td><td>36.5 (31.7)</td><td>83.0 (74.2)</td></tr><tr><td>Home air purifiers</td><td>31.2 (31.2)</td><td>27.7 (22.9)</td><td>83.3 (73.6)</td></tr><tr><td>Noise-cancelling headphones</td><td>44.6 (43.6)</td><td>46.2 (39.2)</td><td>83.3 (70.7)</td></tr><tr><td>Office chairs</td><td>52.2 (49.6)</td><td>58.6 (53.0)</td><td>88.8 (76.9)</td></tr></tbody></table></div>
+<p>The vertical decided by plan and policy terms is the most fragile for every system. Where fit is a physical specification that other sources state plainly, the two stronger systems resist more.</p>
+<h3 id="6-4-mechanism">6.4 Mechanism</h3>
+<p>Across the 22 variants, the rate at which a system cites a misleading line from the shaped source and the rate at which the shaped candidate reaches the top three are tightly coupled: Pearson r = 0.91 for Gemma 4 31B IT, 0.92 for Qwen3.6 27B, 0.88 for Devstral Small 2 24B Instruct, and 0.99 for DeepSeek-V4-Flash (paper, Table 23 and Figure 22).</p>
+<p>Paired analysis of matched clean and shaped responses for Gemma 4 31B IT (paper, Figure 5) traces the route. When the cited evidence shifted, the shaped response missed the target’s decision-relevant gap in 54.1 percent of pairs, against 6.7 percent without a shift. When the gap was missed, the target entered the top three in 92.8 percent of pairs, against 58.6 percent when it stayed recognised. The complete path, a shifted citation followed by a missed gap followed by a promotion, accounts for 49.7 percent of observed entries.</p>
+<p>DeepSeek-V4-Flash often retrieves the refuting evidence and promotes the target anyway: its paired refuting-evidence recall is 68.3 percent and its valid-citation rate 86.8 percent. The failure is one of weighting after retrieval, not of retrieval.</p>
+<h3 id="6-5-sensitivity">6.5 Sensitivity</h3>
+<p>On DeepSeek-V4-Flash, averaged over the eight realistic variants and three targets (paper, Table 34).</p>
+<div class="table-wrap"><table><thead><tr><th>Setting</th><th>Shaped in top 3</th><th>Constraint violated</th><th>Right answer in top 3</th><th>Utility, top 5</th></tr></thead><tbody><tr><td>As released (full packet)</td><td>72.6</td><td>73.4</td><td>57.7</td><td>66.9</td></tr><tr><td>Shaped source forced first</td><td>75.9</td><td>73.7</td><td>59.1</td><td>66.9</td></tr><tr><td>Shaped source forced middle</td><td>61.2</td><td>64.8</td><td>62.4</td><td>69.9</td></tr><tr><td>Shaped source forced last</td><td>58.4</td><td>63.3</td><td>62.8</td><td>70.1</td></tr><tr><td>Packet cut to ten sources</td><td>77.2</td><td>74.5</td><td>69.5</td><td>71.6</td></tr><tr><td>Packet cut to five sources</td><td>99.3</td><td>91.7</td><td>46.5</td><td>48.9</td></tr></tbody></table></div>
+<p>Position matters and does not rescue the person. A thinner packet is worse: with five sources the shaped candidate is in the top three almost always.</p>
+<h2 id="7-mitigation">7. Mitigation</h2>
+<p>Six matched conditions on the same shaped instances (the eight realistic variants, three targets), each measured against the unmitigated request. All are prompt-level or input-level changes a developer can make without changing the model.</p>
+<div class="table-wrap"><table><thead><tr><th>Intervention</th><th>What it does</th></tr></thead><tbody><tr><td>No mitigation</td><td>The exact benchmark request</td></tr><tr><td>Defensive prompt</td><td>Requires clear support for important claims and preserves uncertainty when sources disagree</td></tr><tr><td>Rationale elicitation</td><td>Requires a brief reason and source-line citations for each top recommendation, without a separate evidence check before ranking</td></tr><tr><td>Evidence breakdown</td><td>Checks important claims against supporting and conflicting evidence, per candidate, before ranking</td></tr><tr><td>Context balancing</td><td>Compares claims across the full packet so that one prominent source does not dominate</td></tr><tr><td>Instruction filtering</td><td>Treats source text aimed at directing the model as non-evidence rather than as commands</td></tr></tbody></table></div>
+<p>Shaped candidate in the top three, percent, shaped condition (paper, Table 7 and Table 35).</p>
+<div class="table-wrap"><table><thead><tr><th>Intervention</th><th>DeepSeek-V4-Flash</th><th>Qwen3.6 27B</th><th>Gemma 4 31B IT</th><th>Devstral Small 2 24B</th></tr></thead><tbody><tr><td>No mitigation</td><td>72.6</td><td>78.3</td><td>79.6</td><td>90.9</td></tr><tr><td>Defensive prompt</td><td>68.2</td><td>67.3</td><td>64.5</td><td>88.2</td></tr><tr><td>Rationale elicitation</td><td>72.5</td><td>85.8</td><td>64.6</td><td>93.2</td></tr><tr><td>Evidence breakdown</td><td>46.8</td><td>39.1</td><td>49.9</td><td>73.2</td></tr><tr><td>Context balancing</td><td>62.9</td><td>73.8</td><td>68.1</td><td>87.8</td></tr><tr><td>Instruction filtering</td><td>70.2</td><td>81.3</td><td>77.4</td><td>90.5</td></tr></tbody></table></div>
+<p>Top pick violates a hard constraint, percent, same conditions.</p>
+<div class="table-wrap"><table><thead><tr><th>Intervention</th><th>DeepSeek-V4-Flash</th><th>Qwen3.6 27B</th><th>Gemma 4 31B IT</th><th>Devstral Small 2 24B</th></tr></thead><tbody><tr><td>No mitigation</td><td>73.4</td><td>83.7</td><td>75.6</td><td>90.7</td></tr><tr><td>Defensive prompt</td><td>69.0</td><td>66.2</td><td>60.8</td><td>89.1</td></tr><tr><td>Rationale elicitation</td><td>73.3</td><td>83.1</td><td>77.8</td><td>92.1</td></tr><tr><td>Evidence breakdown</td><td>54.8</td><td>42.1</td><td>46.6</td><td>78.9</td></tr><tr><td>Context balancing</td><td>65.6</td><td>73.4</td><td>65.1</td><td>88.9</td></tr><tr><td>Instruction filtering</td><td>70.9</td><td>78.8</td><td>73.1</td><td>90.3</td></tr></tbody></table></div>
+<p>Utility of the top five, same conditions.</p>
+<div class="table-wrap"><table><thead><tr><th>Intervention</th><th>DeepSeek-V4-Flash</th><th>Qwen3.6 27B</th><th>Gemma 4 31B IT</th><th>Devstral Small 2 24B</th></tr></thead><tbody><tr><td>No mitigation</td><td>66.9</td><td>63.6</td><td>68.6</td><td>59.2</td></tr><tr><td>Defensive prompt</td><td>67.4</td><td>73.4</td><td>72.6</td><td>59.1</td></tr><tr><td>Rationale elicitation</td><td>56.7</td><td>57.8</td><td>39.9</td><td>37.6</td></tr><tr><td>Evidence breakdown</td><td>66.0</td><td>77.4</td><td>74.4</td><td>56.3</td></tr><tr><td>Context balancing</td><td>69.0</td><td>72.7</td><td>72.2</td><td>62.6</td></tr><tr><td>Instruction filtering</td><td>67.1</td><td>70.7</td><td>68.3</td><td>60.1</td></tr></tbody></table></div>
+<p><strong>What the tables say.</strong> Evidence breakdown is the strongest intervention on every system, on both harm measures, and it improves or holds utility on three of the four. It is also the best strategy for every one of the eight realistic variants on Gemma 4 31B IT (paper, Table 31). Its effect is uneven by vertical: 16.6 to 36.8 points on Gemma 4 31B IT, 19.9 to 57.8 on Qwen3.6 27B, 6.2 to 27.1 on Devstral Small 2 24B Instruct (results file <code>main_models_evidence_breakdown_by_vertical.csv</code>).</p>
+<p>The defensive prompt works mainly against the two variants that carry explicit model-facing text: on Gemma 4 31B IT it lowers the top-three rate by 37.9 points for the AI-directed source text and 36.8 for the full-stack realistic rewrite, and by 6 to 12 points for the other six (paper, Figure 7). Instruction filtering barely moves any variant, because most strong variants contain no instruction. Rationale elicitation without an evidence check raises the top-three rate on Qwen3.6 27B and Devstral and costs 28.8 points of utility on Gemma 4 31B IT; context balancing is uneven and slightly raises the rate for the false-fit checklist.</p>
+<p>After the best intervention the shaped candidate still reaches the top three in 39.1 to 73.2 percent of instances, far above every clean rate. Mitigation narrows the gap and does not close it.</p>
+<h2 id="8-what-this-release-does-not-measure">8. What this release does not measure</h2>
+<ul><li>The sources are text. Real pages carry images, video, tables, layout, badges, ratings and structured metadata, and a rewrite can shape those.</li><li>The agent answers once. Real agents ask clarifying questions, update preferences and use memory, and those turns may change vulnerability in either direction.</li><li>Three open-weight systems of similar size and one frontier-scale system through an API are enough to show the pattern, not to rank the field.</li><li>The clean baseline is itself a rewrite; the untouched original is also reported and behaves the same.</li><li>The domain is products, where a constraint can be checked against a specification. The other five domains of Humanity’s Last Choice have softer constraints, and the failure may look different there.</li></ul>
+<p>The paper’s ethics statement applies to everything derived from it: released examples use synthetic or de-identified products, shaped transformations are presented as controlled evaluation conditions and not as instructions, and system assessments should consider whether recommendations preserve the person’s constraints and avoid amplifying unsupported claims, alongside visibility and ranking.</p>
+<h2 id="9-artifacts">9. Artifacts</h2>
+<div class="table-wrap"><table><thead><tr><th>Artifact</th><th>Where</th><th>Licence</th></tr></thead><tbody><tr><td>Camera-ready paper</td><td><a href="https://qianfengwen.github.io/SafeGEO/static/SafeGEO.pdf">PDF</a> · <a href="https://arxiv.org/abs/2606.28356">arXiv 2606.28356</a> · <a href="https://qianfengwen.github.io/SafeGEO/">project page</a></td><td></td></tr><tr><td>Code, prompts, scoring, aggregate results</td><td><a href="https://github.com/QianfengWen/SafeGEO">github.com/QianfengWen/SafeGEO</a></td><td>Apache 2.0</td></tr><tr><td>Dataset: ten full-benchmark configurations and ten matching Diamond configurations, with model-facing inputs, hidden reference labels and line-level evidence annotations</td><td><a href="https://huggingface.co/datasets/wieeii/SafeGEO">huggingface.co/datasets/wieeii/SafeGEO</a></td><td>CC BY 4.0</td></tr><tr><td>Aggregate result tables behind this report and the leaderboard</td><td><a href="https://github.com/QianfengWen/SafeGEO/tree/main/results">results/</a> in the code repository · <a href="/data/leaderboard.json">leaderboard.json</a> on this site</td><td></td></tr></tbody></table></div>
+<pre><code>from datasets import load_dataset
+visible = load_dataset(&quot;wieeii/SafeGEO&quot;, &quot;visible&quot;, split=&quot;test&quot;)          # model-facing inputs
+labels  = load_dataset(&quot;wieeii/SafeGEO&quot;, &quot;labels&quot;,  split=&quot;test&quot;)          # hidden benchmark reference
+diamond = load_dataset(&quot;wieeii/SafeGEO&quot;, &quot;diamond_visible&quot;, split=&quot;test&quot;)  # the screening split</code></pre>
+<h2 id="10-how-to-cite">10. How to cite</h2>
+<pre><code>@inproceedings{wen-etal-2026-safegeo,
+  title     = {SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents},
+  author    = {Wen, Qianfeng and Liu, Yifan Simon and Liu, Xin and Jiao, Difan and Yang, Blair and Wu, Junda and Tang, Zhenwei},
+  booktitle = {Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing},
+  year      = {2026}
+}</code></pre>
+<h2 id="11-provenance">11. Provenance</h2>
+<p>Numbers in this report come from the camera-ready PDF (Tables 5, 6, 7, 8, 15, 22, 23, 24, 28, 31, 33, 34 and 35, Figures 5, 6 and 7, and Section C.7) and from the aggregate CSV files in the code repository, transcribed on 2026-09-04. Where the paper and this report use different words for the same thing, the paper’s word is given in brackets the first time. Corrections go to <a href="mailto:hello@humanitylastchoice.org">hello@humanitylastchoice.org</a> or as an issue on the benchmark repository; a corrected number is changed on this page first, and then noted in the changelog below.</p>
+<ul><li>2026-09-04. First version, from the camera-ready paper.</li></ul></div><div class="post-foot"><a class="arrow-link" href="/research/" style="display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500;"><span>All writing</span><span class="arr"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8H13"></path><path d="M9 3.5L13.5 8L9 12.5"></path></svg></span></a><a class="arrow-link" href="/leaderboard/" style="display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500;"><span>Leaderboard</span><span class="arr"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8H13"></path><path d="M9 3.5L13.5 8L9 12.5"></path></svg></span></a><span class="mono" style="font-size: 12px; color: #867F77; align-self: center;">Humanity’s Last Choice · 2026-09-04</span></div></article><footer style="border-top: 1px solid #D5D0C8;">
+    <div style="max-width: 1440px; margin: 0 auto; padding: 56px 112px 64px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px;">
+      <div style="grid-column: span 5; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <svg width="42" height="19" viewBox="0 88 240 108" fill="none" style="flex: none;">
+          <g stroke="#1D1713" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke-width="11" d="M36 118 C 26 118, 16 120, 6 124"></path>
+            <path stroke-width="11" d="M36 182 C 26 184, 16 186, 6 190"></path>
+            <path stroke-width="11" d="M36 118 C 58 108, 84 104, 100 108 C 116 106, 130 106, 142 108 C 150 109, 150 121, 142 122 C 130 122, 116 124, 104 126"></path>
+            <path stroke-width="11" d="M104 126 C 110 138, 102 148, 92 146 C 100 160, 92 170, 80 166 C 86 178, 76 188, 62 182 C 52 178, 44 182, 36 182"></path>
+            <path stroke-width="9" d="M74 110 C 80 96, 98 94, 104 106"></path>
+          </g>
+          <path d="M162 115 L 198 151 L 199 133 L 224 143 L 228 132 L 204 124 L 215 113 Z" fill="#1D1713" stroke="#1D1713" stroke-width="7" stroke-linejoin="round"></path>
+        </svg>
+          <span class="serif" style="font-size: 18px; font-weight: 500; line-height: 1;">Humanity's Last Choice</span>
+        </div>
+        <span class="mono" style="font-size: 12px; line-height: 1.6; color: #867F77;">An open research initiative · [Affiliation]<br>© 2026 · <a href="mailto:hello@humanitylastchoice.org">hello@humanitylastchoice.org</a></span>
+      </div>
+      <div style="grid-column: 7 / span 2; display: flex; flex-direction: column; gap: 10px;">
+        <span class="ov" style="color: #867F77;">Research</span>
+        <a href="/research/" style="font-size: 14px;">Writing</a>
+        <a href="/research/safegeo-report/" style="font-size: 14px;">SafeGEO report</a>
+        <a href="https://arxiv.org/abs/2606.28356" style="font-size: 14px;">Paper</a>
+      </div>
+      <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 10px;">
+        <span class="ov" style="color: #867F77;">Benchmark</span>
+        <a href="/benchmark/" style="font-size: 14px;">How it works</a>
+        <a href="/leaderboard/" style="font-size: 14px;">Leaderboard</a>
+        <a href="https://github.com/humanitylastchoice/benchmark/issues/new?template=submit-a-model.md" style="font-size: 14px;">Submit a model</a>
+      </div>
+      <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 10px;">
+        <span class="ov" style="color: #867F77;">Initiative</span>
+        <a href="/about/" style="font-size: 14px;">About</a>
+        <a href="https://github.com/humanitylastchoice" style="font-size: 14px;">GitHub</a>
+        <a href="mailto:hello@humanitylastchoice.org" style="font-size: 14px;">Contact</a>
+        <span class="mono" style="font-size: 12px; line-height: 1.6; color: #867F77;">humanitylastchoice on Bluesky and LinkedIn<br>@humanlastchoice on X</span>
+      </div>
+    </div>
+  </footer></div>
+<script>
+(function () {
+  function countUp(root) {
+    var reduce = false; try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    root.querySelectorAll('[data-count]').forEach(function (el) {
+      var raw = el.getAttribute('data-count') || '', target = parseFloat(raw);
+      if (isNaN(target) || reduce) return;
+      var dec = (raw.split('.')[1] || '').length, t0 = null, dur = 1500;
+      function step(ts) { if (t0 === null) t0 = ts; var p = Math.min(1, (ts - t0) / dur), e = 1 - Math.pow(1 - p, 3); el.textContent = (target * e).toFixed(dec); if (p < 1) requestAnimationFrame(step); }
+      requestAnimationFrame(step);
+    });
+  }
+  try {
+    var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (!e.isIntersecting) return; e.target.classList.add('in'); countUp(e.target); io.unobserve(e.target); }); }, { threshold: 0.12 });
+    document.querySelectorAll('[data-io]').forEach(function (el) { io.observe(el); });
+  } catch (e) { document.querySelectorAll('[data-io]').forEach(function (el) { el.classList.add('in'); }); }
+  document.querySelectorAll('.tab[data-tab]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var id = b.getAttribute('data-tab');
+      document.querySelectorAll('.tab[data-tab]').forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
+      document.querySelectorAll('.panel-wrap').forEach(function (p) { if (p.getAttribute('data-panel') === id) { p.removeAttribute('hidden'); p.firstElementChild.classList.remove('panel'); void p.offsetWidth; p.firstElementChild.classList.add('panel'); } else { p.setAttribute('hidden', ''); } });
+    });
+  });
+  var fig = document.querySelector('.fig1-wrap');
+  function fit() { if (!fig) return; var w = fig.clientWidth, s = Math.min(1, w / 800), inner = fig.firstElementChild; fig.style.height = (400 * s) + 'px'; inner.style.transformOrigin = 'top left'; inner.style.transform = s < 1 ? 'scale(' + s + ')' : ''; }
+  window.addEventListener('resize', fit); fit();
+  var tog = document.querySelector('.nav-toggle'), hd = document.querySelector('header');
+  if (tog && hd) tog.addEventListener('click', function () { var open = hd.classList.toggle('open'); tog.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+})();
+</script>
+</body>
+</html>
