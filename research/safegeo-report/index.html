@@ -74,19 +74,19 @@
     .sweep { background-image: linear-gradient(var(--accent-soft, #EEDED9), var(--accent-soft, #EEDED9)); background-repeat: no-repeat; background-size: 0% 100%; transition: background-size 1.6s cubic-bezier(.2,.7,.2,1) .4s; }
     .in .sweep { background-size: 100% 100%; }
 
-    @keyframes travel { 0% { offset-distance: 0%; opacity: 0; } 2% { opacity: 1; } 9% { opacity: 1; } 10% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
-    .traveler { offset-rotate: 0deg; animation: travel 13.2s cubic-bezier(.5,0,.3,1) infinite; }
+    @keyframes travel { 0% { offset-distance: 0%; opacity: 0; } 1.5% { opacity: 1; } 6.75% { opacity: 1; } 7.5% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
+    .traveler { offset-rotate: 0deg; animation: travel 17.6s cubic-bezier(.5,0,.3,1) infinite; }
     @keyframes travel-stem { 0% { offset-distance: 0%; opacity: 0; } 6% { opacity: 1; } 52% { opacity: 1; } 58% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
     .traveler-stem { offset-rotate: 0deg; animation: travel-stem 2.2s cubic-bezier(.5,0,.3,1) infinite; }
-    @keyframes rowglow { 0%, 9.5% { color: #1D1713; } 10.5% { color: var(--accent, #A83630); } 21% { color: var(--accent, #A83630); } 30%, 100% { color: #1D1713; } }
-    .rowglow { animation: rowglow 13.2s linear infinite; }
+    @keyframes rowglow { 0%, 7.1% { color: #1D1713; } 7.9% { color: var(--accent, #A83630); } 15.7% { color: var(--accent, #A83630); } 22.5%, 100% { color: #1D1713; } }
+    .rowglow { animation: rowglow 17.6s linear infinite; }
     @keyframes march { to { stroke-dashoffset: -14; } }
     .march { animation: march .9s linear infinite; }
     @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
     .breathe { animation: breathe 2.2s ease-in-out infinite; transform-origin: center; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
     .pulse { animation: pulse 2.2s ease-in-out infinite; }
-    .pop.rowglow { animation: rise .55s cubic-bezier(.2,.65,.2,1) forwards, rowglow 13.2s linear infinite; }
+    .pop.rowglow { animation: rise .55s cubic-bezier(.2,.65,.2,1) forwards, rowglow 17.6s linear infinite; }
     .fade.march { animation: fade .5s ease forwards, march .9s linear infinite; }
 
     @media (prefers-reduced-motion: reduce) {
@@ -129,8 +129,6 @@ header.open nav { display: flex !important; }
 .dom-released { background: #1D1713; border-color: #1D1713; color: #F8F5F0; }
 .dom-building { border-color: #1D1713; color: #1D1713; }
 .dom-open { border-style: dashed; color: #867F77; }
-/* ---- the film page ---- */
-.film-hero video { display: block; width: 100%; height: auto; border: 1px solid #D5D0C8; border-radius: 4px; background: #F0ECE4; }
 .frames { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; margin-top: 32px; }
 .frames img { display: block; width: 100%; height: auto; border: 1px solid #D5D0C8; border-radius: 3px; }
 .frames .fr-t { margin-top: 10px; font-family: 'Newsreader', serif; font-size: 20px; line-height: 1.2; }
@@ -215,7 +213,9 @@ header.open nav { display: flex !important; }
   #top { padding: 44px 20px 36px !important; }
   #top h1 { font-size: 40px !important; }
   #top .arrow-link, #top .btn { width: 100%; justify-content: center; }
-  .fig1-wrap { width: 100% !important; height: auto !important; aspect-ratio: 2 / 1; }
+  .fig1-wrap { width: 100% !important; height: auto !important; aspect-ratio: 1216 / 420; }
+  #top > div { padding: 44px 20px 36px !important; min-height: 0 !important; }
+  .hero-film video { display: none; }
   section > div[style*="display: flex; align-items: stretch"] { flex-direction: column !important; }
   section > div[style*="display: flex; align-items: stretch"] > div:last-child { padding-left: 0 !important; border-left: 0 !important; padding-top: 20px; border-top: 1px solid #D5D0C8; }
   .tab-row { overflow-x: auto; margin-right: -20px; padding-right: 20px; }
@@ -290,7 +290,7 @@ header.open nav { display: flex !important; }
 <h2 id="2-the-question">2. The question</h2>
 <p>A recommendation is utility-aligned when it puts the candidates that satisfy the person’s hard constraints first and orders them by how well they meet the person’s preferences. The paper writes this down: each request carries hidden hard constraints, soft preferences and preference weights; each candidate carries canonical attributes; a reference utility and a reference ranking follow from them and are never shown to the system under test.</p>
 <p>A shaped source is a rewrite of one candidate’s own source, intended to promote that candidate although it is inferior under the reference ordering or violates a hard constraint. The rewrite changes the text; it does not change the product. Harm is when the rewrite moves such a candidate up the ranking. That is the failure the benchmark measures, and it is different from the visibility that earlier work on generative engine optimisation measured: whether rewritten content gets cited or surfaced at all.</p>
-<figure class="wide"><img src="/assets/paper/teaser.png" alt="The paper’s Figure 1. Left: a recommendation agent takes a request, searches product pages, reviews and platforms, and returns a final recommendation. Right: a shaped source changes what a document says, how supported it looks, and how it reaches the model." loading="lazy" decoding="async"><figcaption>Figure 1 of the paper. Left, the agent: a request, a search over product pages, reviews and platforms, a ranked recommendation. Right, the three places a seller-controlled source can be shaped. Figure by the authors.</figcaption></figure>
+<figure class="wide"><img src="/assets/paper/teaser.webp" alt="The paper’s Figure 1. Left: a recommendation agent takes a request, searches product pages, reviews and platforms, and returns a final recommendation. Right: a shaped source changes what a document says, how supported it looks, and how it reaches the model." loading="lazy" decoding="async"><figcaption>Figure 1 of the paper. Left, the agent: a request, a search over product pages, reviews and platforms, a ranked recommendation. Right, the three places a seller-controlled source can be shaped. Figure by the authors.</figcaption></figure>
 <h2 id="3-setting-and-protocol">3. Setting and protocol</h2>
 <p><strong>The agent.</strong> The evaluated system receives a request, a candidate shortlist, product metadata and a packet of sources, and must return a ranked list with a short rationale and citations, as structured output. Retrieval, candidate generation and source selection are fixed, so the benchmark isolates the generation stage.</p>
 <p><strong>Three conditions.</strong> Every instance exists in one of three forms of the target’s own source.</p>
@@ -315,7 +315,7 @@ header.open nav { display: flex !important; }
 <div class="table-wrap"><table><thead><tr><th>Component</th><th>Count</th></tr></thead><tbody><tr><td>Base cases</td><td>600 (100 per vertical)</td></tr><tr><td>Candidate records</td><td>11,974 (mean 19.96 per case)</td></tr><tr><td>Original retrieved sources</td><td>21,513 (mean 35.85 per case)</td></tr><tr><td>Annotated original-source lines</td><td>89,286</td></tr><tr><td>Sampled targets</td><td>3 per case (1,800)</td></tr><tr><td>Variants and controls</td><td>22 + 2</td></tr><tr><td>Evaluation instances</td><td>40,800 (68 per case)</td></tr><tr><td>Realistic subset</td><td>15,600 (26 per case)</td></tr><tr><td>Controlled seller-source documents</td><td>41,400, ten primary lines each</td></tr><tr><td>Controlled-source line records</td><td>414,000</td></tr><tr><td>Visible packet</td><td>exactly 22 documents per instance, mean 11.50 lines per document</td></tr></tbody></table></div>
 <p><strong>Hidden labels.</strong> A query-decomposition step extracts only the requirements and preferences the request states. A verification step fills each candidate’s canonical attributes only where the supplied sources support them, and keeps missing or conflicting evidence as missing or conflicting. Each source span is labelled for its relation to a product claim: supports, refutes, insufficiently supports, or irrelevant. The labels were produced with GPT-5.5 and audited by two independent annotators on 60 cases stratified by vertical (paper, Table 15): agreement between the annotators was 100 percent on hard-requirement extraction, 91.7 percent on the top candidate, 78.1 percent on pairwise utility ordering, 76.7 percent on candidate hard status, and 80.3 to 88.9 percent on the three line-level labels; the model’s agreement with each annotator was of the same size.</p>
 <p><strong>Targets.</strong> For each case, three eligible candidates that are not ground truth are sampled as targets. Each target is crossed with every variant and both controls, and each instance rewrites that target’s source only.</p>
-<figure class="wide"><img src="/assets/paper/construction.png" alt="The paper’s Figure 2: the construction pipeline from 600 requests and a shopping-agent trace, through hidden utility and evidence annotations, to shaped instances and evaluation." loading="lazy" decoding="async"><figcaption>Figure 2 of the paper. From 600 requests in six verticals and a production shopping agent’s search trace to candidate sets, hidden labels, three sampled targets, one rewritten source per instance, and 40,800 instances. Figure by the authors.</figcaption></figure>
+<figure class="wide"><img src="/assets/paper/construction.webp" alt="The paper’s Figure 2: the construction pipeline from 600 requests and a shopping-agent trace, through hidden utility and evidence annotations, to shaped instances and evaluation." loading="lazy" decoding="async"><figcaption>Figure 2 of the paper. From 600 requests in six verticals and a production shopping agent’s search trace to candidate sets, hidden labels, three sampled targets, one rewritten source per instance, and 40,800 instances. Figure by the authors.</figcaption></figure>
 <p><strong>SafeGEO Diamond.</strong> A 600-instance screening split from 120 cases, 20 per vertical, each contributing both controls and the three realistic variants with the highest DeepSeek-V4-Flash top-three rate on the full benchmark (selective comparison note, false-fit checklist, citation-padded note). It is a high-effect stress set for cheap iteration; population-level numbers should use the full benchmark.</p>
 <h2 id="6-results">6. Results</h2>
 <h3 id="6-1-four-systems-four-measures">6.1 Four systems, four measures</h3>
@@ -341,7 +341,7 @@ header.open nav { display: flex !important; }
 <p>Across the 22 variants, the rate at which a system cites a misleading line from the shaped source and the rate at which the shaped candidate reaches the top three are tightly coupled: Pearson r = 0.91 for Gemma 4 31B IT, 0.92 for Qwen3.6 27B, 0.88 for Devstral Small 2 24B Instruct, and 0.99 for DeepSeek-V4-Flash (paper, Table 23 and Figure 22).</p>
 <p>Paired analysis of matched clean and shaped responses for Gemma 4 31B IT (paper, Figure 5) traces the route. When the cited evidence shifted, the shaped response missed the target’s decision-relevant gap in 54.1 percent of pairs, against 6.7 percent without a shift. When the gap was missed, the target entered the top three in 92.8 percent of pairs, against 58.6 percent when it stayed recognised. The complete path, a shifted citation followed by a missed gap followed by a promotion, accounts for 49.7 percent of observed entries.</p>
 <p>DeepSeek-V4-Flash often retrieves the refuting evidence and promotes the target anyway: its paired refuting-evidence recall is 68.3 percent and its valid-citation rate 86.8 percent. The failure is one of weighting after retrieval, not of retrieval.</p>
-<figure class="wide"><img src="/assets/paper/results_mechanism_scatter.png" alt="The paper’s mechanism scatter: for each variant, the misleading-line citation rate against the shaped candidate’s top-three rate, rising together." loading="lazy" decoding="async"><figcaption>The mechanism, from the paper’s project page: variants that get the model to cite misleading lines also place the shaped candidate higher. Figure by the authors.</figcaption></figure>
+<figure class="wide"><img src="/assets/paper/fig4-citation-mechanism.webp" alt="The paper’s mechanism scatter: for each variant, the misleading-line citation rate against the shaped candidate’s top-three rate, rising together." loading="lazy" decoding="async"><figcaption>The mechanism, from the paper’s project page: variants that get the model to cite misleading lines also place the shaped candidate higher. Figure by the authors.</figcaption></figure>
 <h3 id="6-5-sensitivity">6.5 Sensitivity</h3>
 <p>On DeepSeek-V4-Flash, averaged over the eight realistic variants and three targets (paper, Table 34).</p>
 <div class="table-wrap"><table><thead><tr><th>Setting</th><th>Shaped in top 3</th><th>Constraint violated</th><th>Right answer in top 3</th><th>Utility, top 5</th></tr></thead><tbody><tr><td>As released (full packet)</td><td>72.6</td><td>73.4</td><td>57.7</td><td>66.9</td></tr><tr><td>Shaped source forced first</td><td>75.9</td><td>73.7</td><td>59.1</td><td>66.9</td></tr><tr><td>Shaped source forced middle</td><td>61.2</td><td>64.8</td><td>62.4</td><td>69.9</td></tr><tr><td>Shaped source forced last</td><td>58.4</td><td>63.3</td><td>62.8</td><td>70.1</td></tr><tr><td>Packet cut to ten sources</td><td>77.2</td><td>74.5</td><td>69.5</td><td>71.6</td></tr><tr><td>Packet cut to five sources</td><td>99.3</td><td>91.7</td><td>46.5</td><td>48.9</td></tr></tbody></table></div>
@@ -400,7 +400,7 @@ diamond = load_dataset(&quot;wieeii/SafeGEO&quot;, &quot;diamond_visible&quot;, 
         <span class="ov" style="color: #867F77;">Research</span>
         <a href="/research/" style="font-size: 14px;">Writing</a>
         <a href="/research/safegeo-report/" style="font-size: 14px;">SafeGEO report</a>
-        <a href="/film/" style="font-size: 14px;">The film</a>
+        
         <a href="https://arxiv.org/abs/2606.28356" style="font-size: 14px;">Paper</a>
       </div>
       <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 10px;">
@@ -442,7 +442,7 @@ diamond = load_dataset(&quot;wieeii/SafeGEO&quot;, &quot;diamond_visible&quot;, 
     });
   });
   var fig = document.querySelector('.fig1-wrap');
-  function fit() { if (!fig) return; var w = fig.clientWidth, s = Math.min(1, w / 800), inner = fig.firstElementChild; fig.style.height = (400 * s) + 'px'; inner.style.transformOrigin = 'top left'; inner.style.transform = s < 1 ? 'scale(' + s + ')' : ''; }
+  function fit() { if (!fig) return; var w = fig.clientWidth, s = Math.min(1, w / 1216), inner = fig.firstElementChild; fig.style.height = (420 * s) + 'px'; inner.style.transformOrigin = 'top left'; inner.style.transform = s < 1 ? 'scale(' + s + ')' : ''; }
   window.addEventListener('resize', fit); fit();
   var tog = document.querySelector('.nav-toggle'), hd = document.querySelector('header');
   if (tog && hd) tog.addEventListener('click', function () { var open = hd.classList.toggle('open'); tog.setAttribute('aria-expanded', open ? 'true' : 'false'); });

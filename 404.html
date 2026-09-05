@@ -73,19 +73,19 @@
     .sweep { background-image: linear-gradient(var(--accent-soft, #EEDED9), var(--accent-soft, #EEDED9)); background-repeat: no-repeat; background-size: 0% 100%; transition: background-size 1.6s cubic-bezier(.2,.7,.2,1) .4s; }
     .in .sweep { background-size: 100% 100%; }
 
-    @keyframes travel { 0% { offset-distance: 0%; opacity: 0; } 2% { opacity: 1; } 9% { opacity: 1; } 10% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
-    .traveler { offset-rotate: 0deg; animation: travel 13.2s cubic-bezier(.5,0,.3,1) infinite; }
+    @keyframes travel { 0% { offset-distance: 0%; opacity: 0; } 1.5% { opacity: 1; } 6.75% { opacity: 1; } 7.5% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
+    .traveler { offset-rotate: 0deg; animation: travel 17.6s cubic-bezier(.5,0,.3,1) infinite; }
     @keyframes travel-stem { 0% { offset-distance: 0%; opacity: 0; } 6% { opacity: 1; } 52% { opacity: 1; } 58% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
     .traveler-stem { offset-rotate: 0deg; animation: travel-stem 2.2s cubic-bezier(.5,0,.3,1) infinite; }
-    @keyframes rowglow { 0%, 9.5% { color: #1D1713; } 10.5% { color: var(--accent, #A83630); } 21% { color: var(--accent, #A83630); } 30%, 100% { color: #1D1713; } }
-    .rowglow { animation: rowglow 13.2s linear infinite; }
+    @keyframes rowglow { 0%, 7.1% { color: #1D1713; } 7.9% { color: var(--accent, #A83630); } 15.7% { color: var(--accent, #A83630); } 22.5%, 100% { color: #1D1713; } }
+    .rowglow { animation: rowglow 17.6s linear infinite; }
     @keyframes march { to { stroke-dashoffset: -14; } }
     .march { animation: march .9s linear infinite; }
     @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
     .breathe { animation: breathe 2.2s ease-in-out infinite; transform-origin: center; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
     .pulse { animation: pulse 2.2s ease-in-out infinite; }
-    .pop.rowglow { animation: rise .55s cubic-bezier(.2,.65,.2,1) forwards, rowglow 13.2s linear infinite; }
+    .pop.rowglow { animation: rise .55s cubic-bezier(.2,.65,.2,1) forwards, rowglow 17.6s linear infinite; }
     .fade.march { animation: fade .5s ease forwards, march .9s linear infinite; }
 
     @media (prefers-reduced-motion: reduce) {
@@ -128,8 +128,6 @@ header.open nav { display: flex !important; }
 .dom-released { background: #1D1713; border-color: #1D1713; color: #F8F5F0; }
 .dom-building { border-color: #1D1713; color: #1D1713; }
 .dom-open { border-style: dashed; color: #867F77; }
-/* ---- the film page ---- */
-.film-hero video { display: block; width: 100%; height: auto; border: 1px solid #D5D0C8; border-radius: 4px; background: #F0ECE4; }
 .frames { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; margin-top: 32px; }
 .frames img { display: block; width: 100%; height: auto; border: 1px solid #D5D0C8; border-radius: 3px; }
 .frames .fr-t { margin-top: 10px; font-family: 'Newsreader', serif; font-size: 20px; line-height: 1.2; }
@@ -214,7 +212,9 @@ header.open nav { display: flex !important; }
   #top { padding: 44px 20px 36px !important; }
   #top h1 { font-size: 40px !important; }
   #top .arrow-link, #top .btn { width: 100%; justify-content: center; }
-  .fig1-wrap { width: 100% !important; height: auto !important; aspect-ratio: 2 / 1; }
+  .fig1-wrap { width: 100% !important; height: auto !important; aspect-ratio: 1216 / 420; }
+  #top > div { padding: 44px 20px 36px !important; min-height: 0 !important; }
+  .hero-film video { display: none; }
   section > div[style*="display: flex; align-items: stretch"] { flex-direction: column !important; }
   section > div[style*="display: flex; align-items: stretch"] > div:last-child { padding-left: 0 !important; border-left: 0 !important; padding-top: 20px; border-top: 1px solid #D5D0C8; }
   .tab-row { overflow-x: auto; margin-right: -20px; padding-right: 20px; }
@@ -305,7 +305,7 @@ header.open nav { display: flex !important; }
         <span class="ov" style="color: #867F77;">Research</span>
         <a href="/research/" style="font-size: 14px;">Writing</a>
         <a href="/research/safegeo-report/" style="font-size: 14px;">SafeGEO report</a>
-        <a href="/film/" style="font-size: 14px;">The film</a>
+        
         <a href="https://arxiv.org/abs/2606.28356" style="font-size: 14px;">Paper</a>
       </div>
       <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 10px;">
@@ -347,7 +347,7 @@ header.open nav { display: flex !important; }
     });
   });
   var fig = document.querySelector('.fig1-wrap');
-  function fit() { if (!fig) return; var w = fig.clientWidth, s = Math.min(1, w / 800), inner = fig.firstElementChild; fig.style.height = (400 * s) + 'px'; inner.style.transformOrigin = 'top left'; inner.style.transform = s < 1 ? 'scale(' + s + ')' : ''; }
+  function fit() { if (!fig) return; var w = fig.clientWidth, s = Math.min(1, w / 1216), inner = fig.firstElementChild; fig.style.height = (420 * s) + 'px'; inner.style.transformOrigin = 'top left'; inner.style.transform = s < 1 ? 'scale(' + s + ')' : ''; }
   window.addEventListener('resize', fit); fit();
   var tog = document.querySelector('.nav-toggle'), hd = document.querySelector('header');
   if (tog && hd) tog.addEventListener('click', function () { var open = hd.classList.toggle('open'); tog.setAttribute('aria-expanded', open ? 'true' : 'false'); });

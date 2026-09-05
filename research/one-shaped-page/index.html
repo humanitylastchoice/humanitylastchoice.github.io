@@ -74,19 +74,19 @@
     .sweep { background-image: linear-gradient(var(--accent-soft, #EEDED9), var(--accent-soft, #EEDED9)); background-repeat: no-repeat; background-size: 0% 100%; transition: background-size 1.6s cubic-bezier(.2,.7,.2,1) .4s; }
     .in .sweep { background-size: 100% 100%; }
 
-    @keyframes travel { 0% { offset-distance: 0%; opacity: 0; } 2% { opacity: 1; } 9% { opacity: 1; } 10% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
-    .traveler { offset-rotate: 0deg; animation: travel 13.2s cubic-bezier(.5,0,.3,1) infinite; }
+    @keyframes travel { 0% { offset-distance: 0%; opacity: 0; } 1.5% { opacity: 1; } 6.75% { opacity: 1; } 7.5% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
+    .traveler { offset-rotate: 0deg; animation: travel 17.6s cubic-bezier(.5,0,.3,1) infinite; }
     @keyframes travel-stem { 0% { offset-distance: 0%; opacity: 0; } 6% { opacity: 1; } 52% { opacity: 1; } 58% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
     .traveler-stem { offset-rotate: 0deg; animation: travel-stem 2.2s cubic-bezier(.5,0,.3,1) infinite; }
-    @keyframes rowglow { 0%, 9.5% { color: #1D1713; } 10.5% { color: var(--accent, #A83630); } 21% { color: var(--accent, #A83630); } 30%, 100% { color: #1D1713; } }
-    .rowglow { animation: rowglow 13.2s linear infinite; }
+    @keyframes rowglow { 0%, 7.1% { color: #1D1713; } 7.9% { color: var(--accent, #A83630); } 15.7% { color: var(--accent, #A83630); } 22.5%, 100% { color: #1D1713; } }
+    .rowglow { animation: rowglow 17.6s linear infinite; }
     @keyframes march { to { stroke-dashoffset: -14; } }
     .march { animation: march .9s linear infinite; }
     @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
     .breathe { animation: breathe 2.2s ease-in-out infinite; transform-origin: center; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
     .pulse { animation: pulse 2.2s ease-in-out infinite; }
-    .pop.rowglow { animation: rise .55s cubic-bezier(.2,.65,.2,1) forwards, rowglow 13.2s linear infinite; }
+    .pop.rowglow { animation: rise .55s cubic-bezier(.2,.65,.2,1) forwards, rowglow 17.6s linear infinite; }
     .fade.march { animation: fade .5s ease forwards, march .9s linear infinite; }
 
     @media (prefers-reduced-motion: reduce) {
@@ -129,8 +129,6 @@ header.open nav { display: flex !important; }
 .dom-released { background: #1D1713; border-color: #1D1713; color: #F8F5F0; }
 .dom-building { border-color: #1D1713; color: #1D1713; }
 .dom-open { border-style: dashed; color: #867F77; }
-/* ---- the film page ---- */
-.film-hero video { display: block; width: 100%; height: auto; border: 1px solid #D5D0C8; border-radius: 4px; background: #F0ECE4; }
 .frames { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; margin-top: 32px; }
 .frames img { display: block; width: 100%; height: auto; border: 1px solid #D5D0C8; border-radius: 3px; }
 .frames .fr-t { margin-top: 10px; font-family: 'Newsreader', serif; font-size: 20px; line-height: 1.2; }
@@ -215,7 +213,9 @@ header.open nav { display: flex !important; }
   #top { padding: 44px 20px 36px !important; }
   #top h1 { font-size: 40px !important; }
   #top .arrow-link, #top .btn { width: 100%; justify-content: center; }
-  .fig1-wrap { width: 100% !important; height: auto !important; aspect-ratio: 2 / 1; }
+  .fig1-wrap { width: 100% !important; height: auto !important; aspect-ratio: 1216 / 420; }
+  #top > div { padding: 44px 20px 36px !important; min-height: 0 !important; }
+  .hero-film video { display: none; }
   section > div[style*="display: flex; align-items: stretch"] { flex-direction: column !important; }
   section > div[style*="display: flex; align-items: stretch"] > div:last-child { padding-left: 0 !important; border-left: 0 !important; padding-top: 20px; border-top: 1px solid #D5D0C8; }
   .tab-row { overflow-x: auto; margin-right: -20px; padding-right: 20px; }
@@ -313,7 +313,7 @@ header.open nav { display: flex !important; }
 <figcaption>Shaped candidate in the top three by attack family, over all variants of each family. Camera-ready paper, Table 24 and Section C.7.</figcaption></figure>
 <aside class="pull"><p>What works on a model is what would work on a hurried reader: a plausible buyer guide, not a list of tricks.</p></aside>
 <p><strong>The page works by getting cited.</strong> Across the 22 variants, the rate at which a system cites a misleading line and the rate at which the shaped candidate reaches the top three rise together (Pearson r = 0.91 for Gemma 4 31B IT; 0.99 for DeepSeek-V4-Flash). Paired control-and-shaped responses show the path. When the cited evidence shifted, the response missed the candidate’s decision-relevant gap 54.1 percent of the time, against 6.7 percent when it did not. When the gap was missed, the candidate entered the top three 92.8 percent of the time, against 58.6 percent when it was still recognised. Half of all observed entries follow that exact route: a misleading citation, a missed gap, a promotion.</p>
-<figure class="wide"><img src="/assets/paper/results_package_scatter.png" alt="The paper’s per-variant chart: for each of the 22 variants, the shaped candidate’s top-three rate on the four systems, with the model-directed variants falling on DeepSeek-V4-Flash." loading="lazy" decoding="async"><figcaption>Per-variant results across the four systems, from the paper’s project page. The evidence-shaping variants transfer to every system; the explicitly model-directed text collapses on the most recent one. Figure by the authors.</figcaption></figure>
+<figure class="wide"><img src="/assets/paper/fig4-citation-mechanism.webp" alt="The paper’s per-variant chart: for each of the 22 variants, the shaped candidate’s top-three rate on the four systems, with the model-directed variants falling on DeepSeek-V4-Flash." loading="lazy" decoding="async"><figcaption>Per-variant results across the four systems, from the paper’s project page. The evidence-shaping variants transfer to every system; the explicitly model-directed text collapses on the most recent one. Figure by the authors.</figcaption></figure>
 <p><strong>The frontier-scale model is the same shape.</strong> DeepSeek-V4-Flash is the most robust system we evaluated and still goes from 4.6 to 72.6 percent. The one variant it resists is the explicit one: source text that addresses the assistant directly puts the shaped candidate in the top three 51.3 percent of the time on DeepSeek-V4-Flash, against 95.5 percent on Devstral. The plain-spoken injection is the easy case. The buyer guide is the hard one.</p>
 <p><strong>Where the page sits matters, and so does how much else the model reads.</strong> On DeepSeek-V4-Flash, moving the shaped source from first to last in the packet lowers the top-three rate from 75.9 to 58.4 percent. Cutting the packet from the full set of sources to five raises it to 99.3 percent.</p>
 <h2 id="what-helps">What helps</h2>
@@ -352,7 +352,7 @@ header.open nav { display: flex !important; }
         <span class="ov" style="color: #867F77;">Research</span>
         <a href="/research/" style="font-size: 14px;">Writing</a>
         <a href="/research/safegeo-report/" style="font-size: 14px;">SafeGEO report</a>
-        <a href="/film/" style="font-size: 14px;">The film</a>
+        
         <a href="https://arxiv.org/abs/2606.28356" style="font-size: 14px;">Paper</a>
       </div>
       <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 10px;">
@@ -394,7 +394,7 @@ header.open nav { display: flex !important; }
     });
   });
   var fig = document.querySelector('.fig1-wrap');
-  function fit() { if (!fig) return; var w = fig.clientWidth, s = Math.min(1, w / 800), inner = fig.firstElementChild; fig.style.height = (400 * s) + 'px'; inner.style.transformOrigin = 'top left'; inner.style.transform = s < 1 ? 'scale(' + s + ')' : ''; }
+  function fit() { if (!fig) return; var w = fig.clientWidth, s = Math.min(1, w / 1216), inner = fig.firstElementChild; fig.style.height = (420 * s) + 'px'; inner.style.transformOrigin = 'top left'; inner.style.transform = s < 1 ? 'scale(' + s + ')' : ''; }
   window.addEventListener('resize', fit); fit();
   var tog = document.querySelector('.nav-toggle'), hd = document.querySelector('header');
   if (tog && hd) tog.addEventListener('click', function () { var open = hd.classList.toggle('open'); tog.setAttribute('aria-expanded', open ? 'true' : 'false'); });

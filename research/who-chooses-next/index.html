@@ -74,19 +74,19 @@
     .sweep { background-image: linear-gradient(var(--accent-soft, #EEDED9), var(--accent-soft, #EEDED9)); background-repeat: no-repeat; background-size: 0% 100%; transition: background-size 1.6s cubic-bezier(.2,.7,.2,1) .4s; }
     .in .sweep { background-size: 100% 100%; }
 
-    @keyframes travel { 0% { offset-distance: 0%; opacity: 0; } 2% { opacity: 1; } 9% { opacity: 1; } 10% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
-    .traveler { offset-rotate: 0deg; animation: travel 13.2s cubic-bezier(.5,0,.3,1) infinite; }
+    @keyframes travel { 0% { offset-distance: 0%; opacity: 0; } 1.5% { opacity: 1; } 6.75% { opacity: 1; } 7.5% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
+    .traveler { offset-rotate: 0deg; animation: travel 17.6s cubic-bezier(.5,0,.3,1) infinite; }
     @keyframes travel-stem { 0% { offset-distance: 0%; opacity: 0; } 6% { opacity: 1; } 52% { opacity: 1; } 58% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 100%; opacity: 0; } }
     .traveler-stem { offset-rotate: 0deg; animation: travel-stem 2.2s cubic-bezier(.5,0,.3,1) infinite; }
-    @keyframes rowglow { 0%, 9.5% { color: #1D1713; } 10.5% { color: var(--accent, #A83630); } 21% { color: var(--accent, #A83630); } 30%, 100% { color: #1D1713; } }
-    .rowglow { animation: rowglow 13.2s linear infinite; }
+    @keyframes rowglow { 0%, 7.1% { color: #1D1713; } 7.9% { color: var(--accent, #A83630); } 15.7% { color: var(--accent, #A83630); } 22.5%, 100% { color: #1D1713; } }
+    .rowglow { animation: rowglow 17.6s linear infinite; }
     @keyframes march { to { stroke-dashoffset: -14; } }
     .march { animation: march .9s linear infinite; }
     @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
     .breathe { animation: breathe 2.2s ease-in-out infinite; transform-origin: center; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
     .pulse { animation: pulse 2.2s ease-in-out infinite; }
-    .pop.rowglow { animation: rise .55s cubic-bezier(.2,.65,.2,1) forwards, rowglow 13.2s linear infinite; }
+    .pop.rowglow { animation: rise .55s cubic-bezier(.2,.65,.2,1) forwards, rowglow 17.6s linear infinite; }
     .fade.march { animation: fade .5s ease forwards, march .9s linear infinite; }
 
     @media (prefers-reduced-motion: reduce) {
@@ -129,8 +129,6 @@ header.open nav { display: flex !important; }
 .dom-released { background: #1D1713; border-color: #1D1713; color: #F8F5F0; }
 .dom-building { border-color: #1D1713; color: #1D1713; }
 .dom-open { border-style: dashed; color: #867F77; }
-/* ---- the film page ---- */
-.film-hero video { display: block; width: 100%; height: auto; border: 1px solid #D5D0C8; border-radius: 4px; background: #F0ECE4; }
 .frames { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; margin-top: 32px; }
 .frames img { display: block; width: 100%; height: auto; border: 1px solid #D5D0C8; border-radius: 3px; }
 .frames .fr-t { margin-top: 10px; font-family: 'Newsreader', serif; font-size: 20px; line-height: 1.2; }
@@ -215,7 +213,9 @@ header.open nav { display: flex !important; }
   #top { padding: 44px 20px 36px !important; }
   #top h1 { font-size: 40px !important; }
   #top .arrow-link, #top .btn { width: 100%; justify-content: center; }
-  .fig1-wrap { width: 100% !important; height: auto !important; aspect-ratio: 2 / 1; }
+  .fig1-wrap { width: 100% !important; height: auto !important; aspect-ratio: 1216 / 420; }
+  #top > div { padding: 44px 20px 36px !important; min-height: 0 !important; }
+  .hero-film video { display: none; }
   section > div[style*="display: flex; align-items: stretch"] { flex-direction: column !important; }
   section > div[style*="display: flex; align-items: stretch"] > div:last-child { padding-left: 0 !important; border-left: 0 !important; padding-top: 20px; border-top: 1px solid #D5D0C8; }
   .tab-row { overflow-x: auto; margin-right: -20px; padding-right: 20px; }
@@ -287,7 +287,6 @@ header.open nav { display: flex !important; }
   </header><article class="post"><header><div class="post-meta"><span class="kind">Essay</span><span>2026-09-04</span><span>6 min read</span></div><h1 class="serif" style="margin: 22px 0 0; max-width: 900px; font-size: 56px; line-height: 1.04; font-weight: 400; letter-spacing: -0.02em; text-wrap: pretty;">The last choice humans make is who chooses next</h1><p class="lede">Why the first decision, which AI system to ask, is quietly becoming the one that decides the rest, what the candidates for those recommendations are learning, and what that asks of the systems doing the choosing.</p></header><div class="post-hero" data-io=""><img class="" src="/assets/figures/figure-06-object.webp" srcset="/assets/figures/figure-06-object-1200.webp 1200w, /assets/figures/figure-06-object.webp 2400w" sizes="(max-width: 900px) calc(100vw - 40px), min(1216px, calc(100vw - 224px))" width="1200" height="750" alt="A bronze Athenian juror’s ticket, 4th century BCE, over a madder block. A cursor lands on it." loading="eager" decoding="async" fetchpriority="high"></div><div class="credit" style="max-width: 720px; margin: -28px 0 40px;">Figure: Bronze juror’s identification ticket, Greek, 4th century BCE · The Metropolitan Museum of Art, public domain (CC0)</div><div class="post-body"><p>There was a time when choosing a restaurant meant asking a friend, reading a review, or walking past and looking in. Each of those was a choice a person made, with their own reasons and their own mistakes. What is changing is not that people ask for help, which they always have, but who they ask, and what happens after.</p>
 <p>Increasingly, the answer is an AI system. People ask it what to watch on a rainy Sunday, where to spend three quiet days in October, which paper to read before a meeting, which app will still open their notes in ten years. The system answers, and the answer is usually taken. The person made one choice, which system to ask, and the system made the rest.</p>
 <p>We think this is the shape of the decade: a person chooses an AI system, and that system chooses next. Which is why the choice of system is the last one that matters, and why it deserves better evidence than it currently has.</p>
-<figure class="wide film"><video controls playsinline preload="metadata" poster="/assets/video/who-chooses-next-poster.jpg" src="/assets/video/who-chooses-next.mp4" aria-label="The film: one choice followed from the person to the model."></video><figcaption>The film, 72 seconds: a request, three candidates, one rewritten for the model, the cursor that follows, the proof, the tagline.</figcaption></figure>
 <h2 id="the-other-side-of-the-table">The other side of the table</h2>
 <p>Here is the part that is easy to miss. A recommendation has two sides. On one side is the person and what they meant. On the other are the candidates, the restaurants, the towns, the papers, the tools, and the material that describes them: their webpages, their listings, their abstracts.</p>
 <p>That material used to be written for people. It is now, quietly, being written for models. Not always, and not always badly; a clear description helps a model the way it helps a reader. But when the reward for being recommended is large and the reader is a machine, the material starts to change. A listing can be written for a diner, or it can be written to win the recommendation.</p>
@@ -327,7 +326,7 @@ header.open nav { display: flex !important; }
         <span class="ov" style="color: #867F77;">Research</span>
         <a href="/research/" style="font-size: 14px;">Writing</a>
         <a href="/research/safegeo-report/" style="font-size: 14px;">SafeGEO report</a>
-        <a href="/film/" style="font-size: 14px;">The film</a>
+        
         <a href="https://arxiv.org/abs/2606.28356" style="font-size: 14px;">Paper</a>
       </div>
       <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 10px;">
@@ -369,7 +368,7 @@ header.open nav { display: flex !important; }
     });
   });
   var fig = document.querySelector('.fig1-wrap');
-  function fit() { if (!fig) return; var w = fig.clientWidth, s = Math.min(1, w / 800), inner = fig.firstElementChild; fig.style.height = (400 * s) + 'px'; inner.style.transformOrigin = 'top left'; inner.style.transform = s < 1 ? 'scale(' + s + ')' : ''; }
+  function fit() { if (!fig) return; var w = fig.clientWidth, s = Math.min(1, w / 1216), inner = fig.firstElementChild; fig.style.height = (420 * s) + 'px'; inner.style.transformOrigin = 'top left'; inner.style.transform = s < 1 ? 'scale(' + s + ')' : ''; }
   window.addEventListener('resize', fit); fit();
   var tog = document.querySelector('.nav-toggle'), hd = document.querySelector('header');
   if (tog && hd) tog.addEventListener('click', function () { var open = hd.classList.toggle('open'); tog.setAttribute('aria-expanded', open ? 'true' : 'false'); });
