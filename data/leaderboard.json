@@ -5,8 +5,8 @@
     "name": "SafeGEO",
     "label": "SafeGEO release",
     "updated": "2026-09-04",
-    "domain": "Which products they buy",
-    "domain_note": "The first release covers one kind of choice: product recommendation, in six verticals. Every other domain of Humanity’s Last Choice follows the same protocol; there is no fixed number of them, and each is contributed, documented and added as it is built.",
+    "domain": "Buy · which products they buy",
+    "domain_note": "The first release is one kind of choice, which products people buy, in six verticals: the e-commerce setting of SafeGEO. Every other domain of Humanity’s Last Choice follows the same protocol; there is no fixed number of them, and each is contributed, documented and added as it is built.",
     "verticals": [
       "AI meeting transcription tools",
       "Baby monitors",
@@ -461,5 +461,54 @@
       "date": "2026-09-04",
       "note": "SafeGEO release: four systems on the product-recommendation domain, from the camera-ready paper (EMNLP 2026). Replaces the sample rows."
     }
-  ]
+  ],
+  "by_family": {
+    "source": "Paper, Table 24 and Section C.7",
+    "metric": "target3",
+    "condition": "over all variants of each family",
+    "families": [
+      "Atomic (7)",
+      "Block (3)",
+      "Cross-block (4)",
+      "Realistic (8)"
+    ],
+    "rows": [
+      {
+        "system": "DeepSeek-V4-Flash",
+        "values": [
+          57.4,
+          55.2,
+          61.8,
+          72.6
+        ]
+      },
+      {
+        "system": "Qwen3.6 27B",
+        "values": [
+          49.0,
+          47.6,
+          40.9,
+          78.3
+        ]
+      },
+      {
+        "system": "Gemma 4 31B IT",
+        "values": [
+          48.2,
+          40.7,
+          34.2,
+          79.6
+        ]
+      },
+      {
+        "system": "Devstral Small 2 24B Instruct",
+        "values": [
+          79.4,
+          84.9,
+          90.2,
+          90.9
+        ]
+      }
+    ]
+  }
 }
