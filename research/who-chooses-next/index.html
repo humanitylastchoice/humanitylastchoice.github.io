@@ -124,6 +124,10 @@ header.open nav { display: flex !important; }
 .paper-card .ov { font-size: 11px; color: #867F77; }
 .paper-card .v { margin-top: 6px; font-size: 14.5px; line-height: 1.5; color: #1D1713; }
 .paper-card .v a { text-decoration: underline; text-decoration-color: #B6B0A7; text-underline-offset: 3px; }
+/* ---- the films, played in place ---- */
+.teaser-play:hover { background: #A83630; }
+.teaser-film.playing .teaser-poster, .teaser-film.playing .teaser-play { display: none !important; }
+.teaser-film.playing .teaser-video { display: block !important; }
 /* ---- the domains field ---- */
 .dom { display: inline-block; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 12px; line-height: 1; letter-spacing: .02em; padding: 8px 11px; border-radius: 999px; border: 1px solid #B6B0A7; color: #534B45; white-space: nowrap; }
 .dom-released { background: #1D1713; border-color: #1D1713; color: #F8F5F0; }
@@ -253,6 +257,10 @@ header.open nav { display: flex !important; }
   .lb-page .def.ov > :nth-child(n+3) { display: none; }
   .about h1 { font-size: 36px !important; }
   .teaser { margin-top: 36px !important; }
+  .teaser-caption { grid-template-columns: minmax(0, 1fr) !important; }
+  .glossary { grid-template-columns: minmax(0, 1fr) !important; }
+  .glossary > div { padding-right: 0 !important; }
+  .teaser-play { height: 44px !important; font-size: 13px !important; }
   .about-body p.about-thesis { font-size: 30px; }
 }
 </style>
@@ -370,6 +378,11 @@ header.open nav { display: flex !important; }
   var fig = document.querySelector('.fig1-wrap');
   function fit() { if (!fig) return; var w = fig.clientWidth, s = Math.min(1, w / 1216), inner = fig.firstElementChild; fig.style.height = (420 * s) + 'px'; inner.style.transformOrigin = 'top left'; inner.style.transform = s < 1 ? 'scale(' + s + ')' : ''; }
   window.addEventListener('resize', fit); fit();
+  document.querySelectorAll('.teaser-film').forEach(function (f) {
+    var b = f.querySelector('.teaser-play'), v = f.querySelector('.teaser-video');
+    if (!b || !v) return;
+    b.addEventListener('click', function () { f.classList.add('playing'); v.setAttribute('controls', ''); v.play(); });
+  });
   var tog = document.querySelector('.nav-toggle'), hd = document.querySelector('header');
   if (tog && hd) tog.addEventListener('click', function () { var open = hd.classList.toggle('open'); tog.setAttribute('aria-expanded', open ? 'true' : 'false'); });
 })();
