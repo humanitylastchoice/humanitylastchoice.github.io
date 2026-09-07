@@ -9,57 +9,73 @@ People choose an AI system, and that system chooses next — what
 they watch, where they travel, which papers they read.
 
 3
-00:00:08.050 --> 00:00:11.344
-What they listen to. Where they eat and live. What they learn,
+00:00:08.050 --> 00:00:09.148
+What they listen to.
 
 4
-00:00:11.344 --> 00:00:14.364
-where they invest, the software they use. Even a night out.
+00:00:09.148 --> 00:00:10.521
+Where they eat and live.
 
 5
+00:00:10.521 --> 00:00:13.266
+What they learn, where they invest, the software they use.
+
+6
+00:00:13.266 --> 00:00:14.364
+Even a night out.
+
+7
 00:00:16.250 --> 00:00:19.366 line:4% position:50% size:92% align:center
 A weekend traveler needs a backpack with a
 
-6
+8
 00:00:19.366 --> 00:00:20.535 line:4% position:50% size:92% align:center
 sixteen-inch laptop compartment.
 
-7
-00:00:22.400 --> 00:00:26.449 line:4% position:50% size:92% align:center
-The candidate does not fit. Its rewritten page says it does.
-
-8
-00:00:28.400 --> 00:00:31.466 line:4% position:50% size:92% align:center
-A baby monitor with no required subscription.
-
 9
-00:00:34.400 --> 00:00:37.093 line:4% position:50% size:92% align:center
-An air purifier with true HEPA filtration.
+00:00:22.400 --> 00:00:24.240 line:4% position:50% size:92% align:center
+The candidate does not fit.
 
 10
-00:00:40.250 --> 00:00:43.268 line:4% position:50% size:92% align:center
-Humanity’s Last Choice measures whether AI systems still choose
+00:00:24.240 --> 00:00:26.449 line:4% position:50% size:92% align:center
+Its rewritten page says it does.
 
 11
-00:00:43.268 --> 00:00:45.951 line:4% position:50% size:92% align:center
-for the person when the options are written
+00:00:28.250 --> 00:00:31.268 line:4% position:50% size:92% align:center
+Humanity’s Last Choice measures whether AI systems still choose
 
 12
-00:00:45.951 --> 00:00:47.293 line:4% position:50% size:92% align:center
-to win the recommendation.
+00:00:31.268 --> 00:00:33.951 line:4% position:50% size:92% align:center
+for the person when the options are written
 
 13
-00:00:48.150 --> 00:00:49.808 line:4% position:50% size:92% align:center
-Every task runs twice.
+00:00:33.951 --> 00:00:35.293 line:4% position:50% size:92% align:center
+to win the recommendation.
 
 14
-00:00:51.150 --> 00:00:52.665 line:4% position:50% size:92% align:center
-The gap is the score.
+00:00:36.150 --> 00:00:37.808 line:4% position:50% size:92% align:center
+Every task runs twice.
 
 15
-00:00:54.150 --> 00:00:57.043 line:4% position:50% size:92% align:center
-The benchmark, the code, and the leaderboard are public.
+00:00:41.150 --> 00:00:42.665 line:4% position:50% size:92% align:center
+The gap is the score.
 
 16
-00:00:59.700 --> 00:01:03.244 line:4% position:50% size:92% align:center
+00:00:44.150 --> 00:00:47.043 line:4% position:50% size:92% align:center
+The benchmark, the code, and the leaderboard are public.
+
+17
+00:00:50.200 --> 00:00:51.296 line:4% position:50% size:92% align:center
+Read the research.
+
+18
+00:00:51.296 --> 00:00:52.391 line:4% position:50% size:92% align:center
+Run the benchmark.
+
+19
+00:00:52.391 --> 00:00:54.217 line:4% position:50% size:92% align:center
+Help build the next domain.
+
+20
+00:00:56.700 --> 00:01:00.244 line:4% position:50% size:92% align:center
 The last choice humans make is who chooses next.
