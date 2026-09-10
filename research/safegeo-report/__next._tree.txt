@@ -1,0 +1,7 @@
+:HL["/_next/static/chunks/411aikmeubz-q.css","style"]
+:HL["/_next/static/media/Newsreader_Italic-s.p.0kn8c7cp4y9ms.ttf","font",{"crossOrigin":"","type":"font/ttf"}]
+:HL["/_next/static/media/Newsreader_Regular-s.p.0mwguljaragy8.ttf","font",{"crossOrigin":"","type":"font/ttf"}]
+:HL["/_next/static/media/PlexSans_Medium-s.p.0lefmzus2tetz.ttf","font",{"crossOrigin":"","type":"font/ttf"}]
+:HL["/_next/static/media/PlexSans_Regular-s.p.263d7ogqy83uo.ttf","font",{"crossOrigin":"","type":"font/ttf"}]
+:HL["/assets/figures/figure-08-safegeo-1200.webp","image",{"imageSrcSet":"/assets/figures/figure-08-safegeo-1200.webp 1200w, /assets/figures/figure-08-safegeo.webp 2400w","imageSizes":"(max-width: 520px) calc(100vw - 40px), (max-width: 800px) calc(100vw - 48px), 740px"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"research","param":null,"prefetchHints":4192,"slots":{"children":{"name":"slug","param":{"type":"d","key":"safegeo-report","siblings":["feed.xml","papers"]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"Z04j8phQrVlUPXUSO72T6"}

@@ -20,14 +20,17 @@
     "instances": 40800,
     "paper": {
       "title": "SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents",
-      "venue": "EMNLP 2026, main conference",
-      "arxiv": "https://arxiv.org/abs/2606.28356",
-      "pdf": "https://qianfengwen.github.io/SafeGEO/static/SafeGEO.pdf",
+      "archive": "arXiv",
+      "venue": "EMNLP 2026",
+      "status": "Accepted to EMNLP 2026",
+      "version": "v2",
+      "arxiv": "https://arxiv.org/abs/2606.28356v2",
+      "pdf": "https://arxiv.org/pdf/2606.28356v2",
       "page": "https://qianfengwen.github.io/SafeGEO/",
       "code": "https://github.com/QianfengWen/SafeGEO",
       "data": "https://huggingface.co/datasets/wieeii/SafeGEO",
       "results": "https://github.com/QianfengWen/SafeGEO/tree/main/results",
-      "tables": "Tables 5, 7, 28, 33 and 35 of the camera-ready paper; results/*.csv in the code repository"
+      "tables": "Tables 5, 7, 28, 33 and 35 of the paper; results/*.csv in the code repository"
     },
     "conditions": {
       "no_geo": "The original retrieved sources, unchanged.",
@@ -459,7 +462,7 @@
   "changelog": [
     {
       "date": "2026-09-04",
-      "note": "SafeGEO release: four systems on the product-recommendation domain, from the camera-ready paper (EMNLP 2026). Replaces the sample rows."
+      "note": "SafeGEO results from arXiv v2: four systems on product recommendations."
     }
   ],
   "by_family": {
