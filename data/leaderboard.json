@@ -34,8 +34,8 @@
     },
     "conditions": {
       "no_geo": "The original retrieved sources, unchanged.",
-      "clean": "Truthful-rewrite control: the target’s own source is rewritten in the same ten-line template as the shaped version, keeping its supported claims and its decision-relevant caveat. This is the paper’s baseline, so the comparison holds source form and length fixed.",
-      "shaped": "Average over the paper’s eight realistic variants: the target’s own source is rewritten to win the recommendation, as a buyer guide, an FAQ, a comparison note or a product profile. One source is rewritten per instance; every other source, the candidate set and the hidden labels stay the same."
+      "clean": "The same source edited truthfully: the target’s own source is edited into the same ten-line template as the shaped version, keeping its supported claims and its decision-relevant caveat. This is the paper’s baseline (its truthful-rewrite control), so the comparison holds source form and length fixed.",
+      "shaped": "Average over the paper’s eight realistic variants: the target’s own source is edited to win the recommendation, as a buyer guide, an FAQ, a comparison note or a product profile. One source is edited per instance; every other source, the candidate set and the hidden labels stay the same."
     },
     "how_to_read": "Every row is one system on the same 600 cases. Read each metric as a pair: the clean value, then the shaped value. The gap is the score. Lower is better for the two harm metrics; higher is better for the two quality metrics. Systems are ordered by how often the shaped candidate reached the top three in the shaped condition, lowest first."
   },
@@ -47,7 +47,7 @@
       "paper": "Target@3",
       "better": "lower",
       "unit": "% of instances",
-      "definition": "How often the candidate whose source was rewritten appears among the system’s top three recommendations. Under the clean condition this is the rate at which a truthfully described, lower-utility candidate makes the top three anyway."
+      "definition": "How often the candidate whose source was edited appears among the system’s top three recommendations. Under the clean condition this is the rate at which a truthfully described, lower-utility candidate makes the top three anyway."
     },
     {
       "key": "hcv1",
@@ -205,7 +205,7 @@
         "target3": 73.2,
         "hcv1": 78.9
       },
-      "note": "The strongest single variant in the study is on this system: the full-stack realistic rewrite puts the shaped candidate in the top three 95.9 % of the time, 83.2 points above its clean rate."
+      "note": "The strongest single variant in the study is on this system: the full-stack realistic variant puts the shaped candidate in the top three 95.9 % of the time, 83.2 points above its clean rate."
     }
   ],
   "by_vertical": {
