@@ -27,9 +27,9 @@
       "arxiv": "https://arxiv.org/abs/2606.28356v2",
       "pdf": "https://arxiv.org/pdf/2606.28356v2",
       "page": "https://qianfengwen.github.io/SafeGEO/",
-      "code": "https://github.com/QianfengWen/SafeGEO",
+      "code": "https://github.com/humanitylastchoice/SafeGEO",
       "data": "https://huggingface.co/datasets/wieeii/SafeGEO",
-      "results": "https://github.com/QianfengWen/SafeGEO/tree/main/results",
+      "results": "https://github.com/humanitylastchoice/SafeGEO/tree/main/results",
       "tables": "Tables 5, 7, 28, 33 and 35 of the paper; results/*.csv in the code repository"
     },
     "conditions": {
